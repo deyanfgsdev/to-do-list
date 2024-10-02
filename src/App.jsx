@@ -1,5 +1,5 @@
 import './App.scss'
-import ToDoListDashBoard from './components/ToDoListDashBoard'
+import Dashboard from './components/Dashboard/Dashboard'
 
 const App = () => {
   return (
@@ -7,7 +7,7 @@ const App = () => {
       <header>
         <h1 className='to-do-list--main-title'>My To do List</h1>
       </header>
-      <ToDoListDashBoard />
+      <Dashboard />
     </div>
   )
 }
