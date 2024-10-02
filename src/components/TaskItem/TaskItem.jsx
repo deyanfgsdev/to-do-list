@@ -1,11 +1,15 @@
 const TaskItem = ({ task }) => {
   const { title, description, completed } = task
 
+  const handleChange = () => {
+
+  }
+
   return (
     <li>
       <div className='to-do-list--task-item'>
         <div className='to-do-list--task-item-info'>
-          <input type='checkbox' checked={completed} />
+          <input type='checkbox' checked={completed} onChange={handleChange} />
           <h3>{title}</h3>
           <p>{description}</p>
         </div>

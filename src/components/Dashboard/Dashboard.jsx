@@ -1,4 +1,5 @@
 import TaskItems from '../TasksItems/TasksItems'
+import AddTaskModal from '../AddTaskModal/AddTaskModal'
 
 import { useState } from 'react'
 
@@ -19,11 +20,17 @@ const Dashboard = () => {
   ]
 
   const [tasks, setTasks] = useState(customTasks)
+  const [showAddTaskModal, setShowAddTaskModal] = useState(false)
+
+  const handleAddTaskClick = () => {
+    setShowAddTaskModal(true)
+  }
 
   return (
     <main className='to-do-list--dashboard'>
       <TaskItems tasks={tasks} />
-      <button className='to-do-list--add-task-button'>Add task</button>
+      <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>Add task</button>
+      {showAddTaskModal && <AddTaskModal />}
     </main>
   )
 }
