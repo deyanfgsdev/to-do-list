@@ -1,8 +1,9 @@
+import { useState } from 'react'
+
 import TaskItems from '../TasksItems/TasksItems'
 import AddTaskModal from '../AddTaskModal/AddTaskModal'
 import TaskDetailsModal from '../TaskDetailsModal/TaskDetailsModal'
-
-import { useState } from 'react'
+import TaskEditingModal from '../TaskEditingModal/TaskEditingModal'
 
 const Dashboard = () => {
   // Initial fake tasks
@@ -25,6 +26,7 @@ const Dashboard = () => {
   const [showAddTaskModal, setShowAddTaskModal] = useState(false)
   const [task, setTask] = useState(null)
   const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
+  const [showTaskEditingModal, setShowTaskEditingModal] = useState(false)
 
   const handleAddTaskClick = () => {
     setShowAddTaskModal(true)
@@ -43,6 +45,14 @@ const Dashboard = () => {
     setTask(task)
   }
 
+  const taskToEdit = () => {
+    setTask(task)
+  }
+
+  const checkShowTaskEditingModal = (showModal) => {
+    setShowTaskEditingModal(showModal)
+  }
+
   const deleteTask = (taskToDelete) => {
     const newTasks = tasks.filter((task) => task.id !== taskToDelete.id)
     setTasks(newTasks)
@@ -58,11 +68,14 @@ const Dashboard = () => {
         tasks={tasks}
         taskDetails={taskDetails}
         checkShowTaskDetailsModal={checkShowTaskDetailsModal}
+        taskToEdit={taskToEdit}
+        checkShowTaskEditingModal={checkShowTaskEditingModal}
         deleteTask={deleteTask}
       />
       <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>Add task</button>
       {showAddTaskModal && <AddTaskModal currentTasksNumber={tasks.length} addTask={addTask} checkAddTaskShowModal={checkAddTaskShowModal} />}
       {task && showTaskDetailsModal && <TaskDetailsModal task={task} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />}
+      {task && showTaskEditingModal && <TaskEditingModal task={task} />}
     </main>
   )
 }
