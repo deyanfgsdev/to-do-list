@@ -1,5 +1,6 @@
 import TaskItems from '../TasksItems/TasksItems'
 import AddTaskModal from '../AddTaskModal/AddTaskModal'
+import TaskDetailsModal from '../TaskDetailsModal/TaskDetailsModal'
 
 import { useState } from 'react'
 
@@ -22,6 +23,8 @@ const Dashboard = () => {
 
   const [tasks, setTasks] = useState(customTasks)
   const [showAddTaskModal, setShowAddTaskModal] = useState(false)
+  const [task, setTask] = useState(null)
+  const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
 
   const handleAddTaskClick = () => {
     setShowAddTaskModal(true)
@@ -32,15 +35,24 @@ const Dashboard = () => {
     setTasks(newTasks)
   }
 
-  const checkShowModal = (showModal) => {
+  const checkAddTaskShowModal = (showModal) => {
     setShowAddTaskModal(showModal)
+  }
+
+  const taskDetails = (task) => {
+    setTask(task)
+  }
+
+  const checkShowTaskDetailsModal = (showModal) => {
+    setShowTaskDetailsModal(showModal)
   }
 
   return (
     <main className='to-do-list--dashboard'>
-      <TaskItems tasks={tasks} />
+      <TaskItems tasks={tasks} taskDetails={taskDetails} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />
       <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>Add task</button>
-      {showAddTaskModal && <AddTaskModal currentTasksNumber={tasks.length} addTask={addTask} checkShowModal={checkShowModal} />}
+      {showAddTaskModal && <AddTaskModal currentTasksNumber={tasks.length} addTask={addTask} checkAddTaskShowModal={checkAddTaskShowModal} />}
+      {task && showTaskDetailsModal && <TaskDetailsModal task={task} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />}
     </main>
   )
 }

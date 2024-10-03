@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
-const AddTaskModal = ({ currentTasksNumber, addTask, checkShowModal }) => {
+const AddTaskModal = ({ currentTasksNumber, addTask, checkAddTaskShowModal }) => {
   const [showTitleInputError, setShowTitleInputError] = useState(false)
 
   const handleCloseModalClick = () => {
-    checkShowModal(false)
+    checkAddTaskShowModal(false)
   }
 
   const handleSubmit = (event) => {
@@ -29,7 +29,7 @@ const AddTaskModal = ({ currentTasksNumber, addTask, checkShowModal }) => {
     }
 
     addTask(task)
-    checkShowModal(false)
+    checkAddTaskShowModal(false)
   }
 
   return (
