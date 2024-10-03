@@ -43,13 +43,23 @@ const Dashboard = () => {
     setTask(task)
   }
 
+  const deleteTask = (taskToDelete) => {
+    const newTasks = tasks.filter((task) => task.id !== taskToDelete.id)
+    setTasks(newTasks)
+  }
+
   const checkShowTaskDetailsModal = (showModal) => {
     setShowTaskDetailsModal(showModal)
   }
 
   return (
     <main className='to-do-list--dashboard'>
-      <TaskItems tasks={tasks} taskDetails={taskDetails} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />
+      <TaskItems
+        tasks={tasks}
+        taskDetails={taskDetails}
+        checkShowTaskDetailsModal={checkShowTaskDetailsModal}
+        deleteTask={deleteTask}
+      />
       <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>Add task</button>
       {showAddTaskModal && <AddTaskModal currentTasksNumber={tasks.length} addTask={addTask} checkAddTaskShowModal={checkAddTaskShowModal} />}
       {task && showTaskDetailsModal && <TaskDetailsModal task={task} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />}

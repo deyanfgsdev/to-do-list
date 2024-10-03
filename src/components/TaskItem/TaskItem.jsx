@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const TaskItem = ({ task, taskDetails, checkShowTaskDetailsModal }) => {
+const TaskItem = ({ task, taskDetails, checkShowTaskDetailsModal, deleteTask }) => {
   const { title, description, completed } = task
   const initialIsCompleted = completed
 
@@ -15,6 +15,10 @@ const TaskItem = ({ task, taskDetails, checkShowTaskDetailsModal }) => {
     checkShowTaskDetailsModal(true)
   }
 
+  const handleDeleteClick = () => {
+    deleteTask(task)
+  }
+
   return (
     <li>
       <div className='to-do-list--task-item'>
@@ -26,7 +30,7 @@ const TaskItem = ({ task, taskDetails, checkShowTaskDetailsModal }) => {
         <div className='to-do-list--task-item-actions'>
           <button onClick={handleDetailsClick}>Details</button>
           <button>Edit</button>
-          <button>Delete</button>
+          <button onClick={handleDeleteClick}>Delete</button>
         </div>
       </div>
     </li>
