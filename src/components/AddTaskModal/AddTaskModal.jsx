@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
-const AddTaskModal = ({ currentTasksNumber, addTask, checkAddTaskShowModal }) => {
+import { v4 as uuidv4 } from 'uuid'
+
+const AddTaskModal = ({ addTask, checkAddTaskShowModal }) => {
   const [showTitleInputError, setShowTitleInputError] = useState(false)
 
   const handleCloseModalClick = () => {
@@ -22,7 +24,7 @@ const AddTaskModal = ({ currentTasksNumber, addTask, checkAddTaskShowModal }) =>
     }
 
     const task = {
-      id: currentTasksNumber + 1,
+      id: uuidv4(),
       title: formTitle,
       description: formDescription,
       isCompleted: false
