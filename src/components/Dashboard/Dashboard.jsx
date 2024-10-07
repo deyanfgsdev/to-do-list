@@ -45,7 +45,7 @@ const Dashboard = () => {
     setTask(task)
   }
 
-  const taskToEdit = () => {
+  const taskToEdit = (task) => {
     setTask(task)
   }
 
@@ -55,6 +55,20 @@ const Dashboard = () => {
 
   const deleteTask = (taskToDelete) => {
     const newTasks = tasks.filter((task) => task.id !== taskToDelete.id)
+    setTasks(newTasks)
+  }
+
+  const editTask = (taskToEdit) => {
+    const newTasks = tasks.map((task) => {
+      if (task.id === taskToEdit.id) {
+        return taskToEdit
+      }
+
+      return task
+    })
+
+    console.log({ newTasks })
+
     setTasks(newTasks)
   }
 
@@ -75,7 +89,7 @@ const Dashboard = () => {
       <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>Add task</button>
       {showAddTaskModal && <AddTaskModal currentTasksNumber={tasks.length} addTask={addTask} checkAddTaskShowModal={checkAddTaskShowModal} />}
       {task && showTaskDetailsModal && <TaskDetailsModal task={task} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />}
-      {task && showTaskEditingModal && <TaskEditingModal task={task} />}
+      {task && showTaskEditingModal && <TaskEditingModal task={task} editTask={editTask} checkShowTaskEditingModal={checkShowTaskEditingModal} />}
     </main>
   )
 }
