@@ -67,8 +67,6 @@ const Dashboard = () => {
       return task
     })
 
-    console.log({ newTasks })
-
     setTasks(newTasks)
   }
 
@@ -78,6 +76,7 @@ const Dashboard = () => {
 
   return (
     <main className='to-do-list--dashboard'>
+      {!tasks.length && <p className='to-do-list--no-tasks'>There are no tasks. Add your first task!</p>}
       <TaskItems
         tasks={tasks}
         taskDetails={taskDetails}
