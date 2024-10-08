@@ -50,11 +50,7 @@ const Dashboard = () => {
     setTasks(newTasks)
   }
 
-  const showTaskDetails = (task) => {
-    setTask(task)
-  }
-
-  const taskToEdit = (task) => {
+  const setTaskDetails = (task) => {
     setTask(task)
   }
 
@@ -92,9 +88,8 @@ const Dashboard = () => {
       {!!tasks.length && <TaskItems
         tasks={tasks}
         updateTaskState={updateTaskState}
-        showTaskDetails={showTaskDetails}
+        setTaskDetails={setTaskDetails}
         checkShowTaskDetailsModal={checkShowTaskDetailsModal}
-        taskToEdit={taskToEdit}
         checkShowTaskEditingModal={checkShowTaskEditingModal}
         deleteTask={deleteTask}
                          />}
