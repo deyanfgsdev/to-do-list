@@ -26,11 +26,15 @@ const Dashboard = () => {
     setShowAddTaskModal(true)
   }
 
+  const saveAndSetTasks = (newTasks) => {
+    storageSaveTasks(newTasks)
+    setTasks(newTasks)
+  }
+
   const addTask = (task) => {
     const newTasks = [task, ...tasks]
 
-    storageSaveTasks(newTasks)
-    setTasks(newTasks)
+    saveAndSetTasks(newTasks)
   }
 
   const checkAddTaskShowModal = (showModal) => {
@@ -46,8 +50,7 @@ const Dashboard = () => {
       return task
     })
 
-    storageSaveTasks(newTasks)
-    setTasks(newTasks)
+    saveAndSetTasks(newTasks)
   }
 
   const setTaskDetails = (task) => {
@@ -61,8 +64,7 @@ const Dashboard = () => {
   const deleteTask = (taskToDelete) => {
     const newTasks = tasks.filter((task) => task.id !== taskToDelete.id)
 
-    storageSaveTasks(newTasks)
-    setTasks(newTasks)
+    saveAndSetTasks(newTasks)
   }
 
   const editTask = (taskToEdit) => {
