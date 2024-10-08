@@ -35,6 +35,19 @@ const Dashboard = () => {
     setShowAddTaskModal(showModal)
   }
 
+  const updateTaskState = (taskStateToUpdate) => {
+    const newTasks = tasks.map((task) => {
+      if (task.id === taskStateToUpdate.id) {
+        return taskStateToUpdate
+      }
+
+      return task
+    })
+
+    window.localStorage.setItem('to-do-list--tasks', JSON.stringify(newTasks))
+    setTasks(newTasks)
+  }
+
   const showTaskDetails = (task) => {
     setTask(task)
   }
@@ -49,6 +62,8 @@ const Dashboard = () => {
 
   const deleteTask = (taskToDelete) => {
     const newTasks = tasks.filter((task) => task.id !== taskToDelete.id)
+
+    window.localStorage.setItem('to-do-list--tasks', JSON.stringify(newTasks))
     setTasks(newTasks)
   }
 
@@ -61,6 +76,7 @@ const Dashboard = () => {
       return task
     })
 
+    window.localStorage.setItem('to-do-list--tasks', JSON.stringify(newTasks))
     setTasks(newTasks)
   }
 
@@ -73,6 +89,7 @@ const Dashboard = () => {
       {!tasks.length && <p className='to-do-list--no-tasks'>There are no tasks. Add your first task!</p>}
       {!!tasks.length && <TaskItems
         tasks={tasks}
+        updateTaskState={updateTaskState}
         showTaskDetails={showTaskDetails}
         checkShowTaskDetailsModal={checkShowTaskDetailsModal}
         taskToEdit={taskToEdit}

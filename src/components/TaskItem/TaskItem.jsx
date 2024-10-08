@@ -1,13 +1,16 @@
 import { useState } from 'react'
 
-const TaskItem = ({ task, showTaskDetails, checkShowTaskDetailsModal, taskToEdit, checkShowTaskEditingModal, deleteTask }) => {
-  const { title, description, completed } = task
-  const initialIsCompleted = completed
+const TaskItem = ({ task, updateTaskState, showTaskDetails, checkShowTaskDetailsModal, taskToEdit, checkShowTaskEditingModal, deleteTask }) => {
+  const { title, description, isCompleted } = task
+  const initialIsCompleted = isCompleted
 
-  const [isCompleted, setIsCompleted] = useState(initialIsCompleted)
+  const [taskCompleted, setTaskCompleted] = useState(initialIsCompleted)
 
-  const handleTaskStatusChange = () => {
-    setIsCompleted(!isCompleted)
+  const handleTaskStateChange = () => {
+    setTaskCompleted(!taskCompleted)
+
+    const updatedTask = { ...task, isCompleted: !taskCompleted }
+    updateTaskState(updatedTask)
   }
 
   const handleDetailsClick = () => {
@@ -28,7 +31,7 @@ const TaskItem = ({ task, showTaskDetails, checkShowTaskDetailsModal, taskToEdit
     <li>
       <div className='to-do-list--task-item'>
         <div className='to-do-list--task-item-info'>
-          <input type='checkbox' checked={isCompleted} onChange={handleTaskStatusChange} />
+          <input type='checkbox' checked={taskCompleted} onChange={handleTaskStateChange} />
           <h3>{title}</h3>
           <p>{description}</p>
         </div>

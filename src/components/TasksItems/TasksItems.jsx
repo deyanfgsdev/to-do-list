@@ -1,6 +1,6 @@
 import TaskItem from '../TaskItem/TaskItem'
 
-const TaskItems = ({ tasks, showTaskDetails, checkShowTaskDetailsModal, taskToEdit, checkShowTaskEditingModal, deleteTask }) => {
+const TaskItems = ({ tasks, updateTaskState, showTaskDetails, checkShowTaskDetailsModal, taskToEdit, checkShowTaskEditingModal, deleteTask }) => {
   return (
     <div className='to-do-list--tasks-items'>
       <ul>
@@ -8,6 +8,7 @@ const TaskItems = ({ tasks, showTaskDetails, checkShowTaskDetailsModal, taskToEd
           <TaskItem
             key={task.id}
             task={task}
+            updateTaskState={updateTaskState}
             showTaskDetails={showTaskDetails}
             checkShowTaskDetailsModal={checkShowTaskDetailsModal}
             taskToEdit={taskToEdit}
