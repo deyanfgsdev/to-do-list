@@ -37,10 +37,10 @@ const Dashboard = () => {
     setShowAddTaskModal(showModal)
   }
 
-  const updateTaskState = (taskStateToUpdate) => {
+  const refreshTaskList = (taskToUpdate) => {
     const newTasks = tasks.map((task) => {
-      if (task.id === taskStateToUpdate.id) {
-        return taskStateToUpdate
+      if (task.id === taskToUpdate.id) {
+        return taskToUpdate
       }
 
       return task
@@ -66,16 +66,7 @@ const Dashboard = () => {
   }
 
   const editTask = (taskToEdit) => {
-    const newTasks = tasks.map((task) => {
-      if (task.id === taskToEdit.id) {
-        return taskToEdit
-      }
-
-      return task
-    })
-
-    storageSaveTasks(newTasks)
-    setTasks(newTasks)
+    refreshTaskList(taskToEdit)
   }
 
   const checkShowTaskDetailsModal = (showModal) => {
@@ -87,7 +78,7 @@ const Dashboard = () => {
       {!tasks.length && <p className='to-do-list--no-tasks'>There are no tasks. Add your first task!</p>}
       {!!tasks.length && <TaskItems
         tasks={tasks}
-        updateTaskState={updateTaskState}
+        refreshTaskList={refreshTaskList}
         setTaskDetails={setTaskDetails}
         checkShowTaskDetailsModal={checkShowTaskDetailsModal}
         checkShowTaskEditingModal={checkShowTaskEditingModal}

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const TaskItem = ({ task, updateTaskState, setTaskDetails, checkShowTaskDetailsModal, checkShowTaskEditingModal, deleteTask }) => {
+const TaskItem = ({ task, refreshTaskList, setTaskDetails, checkShowTaskDetailsModal, checkShowTaskEditingModal, deleteTask }) => {
   const { title, description, isCompleted } = task
   const initialIsCompleted = isCompleted
 
@@ -10,7 +10,7 @@ const TaskItem = ({ task, updateTaskState, setTaskDetails, checkShowTaskDetailsM
     setTaskCompleted(!taskCompleted)
 
     const updatedTask = { ...task, isCompleted: !taskCompleted }
-    updateTaskState(updatedTask)
+    refreshTaskList(updatedTask)
   }
 
   const handleDetailsClick = () => {
