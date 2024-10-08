@@ -5,9 +5,11 @@ import AddTaskModal from '../AddTaskModal/AddTaskModal'
 import TaskDetailsModal from '../TaskDetailsModal/TaskDetailsModal'
 import TaskEditingModal from '../TaskEditingModal/TaskEditingModal'
 
+import { storageGetTasks, storageSaveTasks } from '../../storage'
+
 const Dashboard = () => {
   const [tasks, setTasks] = useState(() => {
-    const storageTasks = JSON.parse(window.localStorage.getItem('to-do-list--tasks'))
+    const storageTasks = storageGetTasks()
 
     if (storageTasks) {
       return storageTasks
@@ -27,7 +29,7 @@ const Dashboard = () => {
   const addTask = (task) => {
     const newTasks = [task, ...tasks]
 
-    window.localStorage.setItem('to-do-list--tasks', JSON.stringify(newTasks))
+    storageSaveTasks(newTasks)
     setTasks(newTasks)
   }
 
@@ -44,7 +46,7 @@ const Dashboard = () => {
       return task
     })
 
-    window.localStorage.setItem('to-do-list--tasks', JSON.stringify(newTasks))
+    storageSaveTasks(newTasks)
     setTasks(newTasks)
   }
 
@@ -63,7 +65,7 @@ const Dashboard = () => {
   const deleteTask = (taskToDelete) => {
     const newTasks = tasks.filter((task) => task.id !== taskToDelete.id)
 
-    window.localStorage.setItem('to-do-list--tasks', JSON.stringify(newTasks))
+    storageSaveTasks(newTasks)
     setTasks(newTasks)
   }
 
@@ -76,7 +78,7 @@ const Dashboard = () => {
       return task
     })
 
-    window.localStorage.setItem('to-do-list--tasks', JSON.stringify(newTasks))
+    storageSaveTasks(newTasks)
     setTasks(newTasks)
   }
 
