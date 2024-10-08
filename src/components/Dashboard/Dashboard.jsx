@@ -1,9 +1,13 @@
 import { useState } from 'react'
 
+import './Dashboard.scss'
+
 import TaskItems from '../TasksItems/TasksItems'
 import AddTaskModal from '../AddTaskModal/AddTaskModal'
 import TaskDetailsModal from '../TaskDetailsModal/TaskDetailsModal'
 import TaskEditingModal from '../TaskEditingModal/TaskEditingModal'
+
+import { IoAddCircle } from 'react-icons/io5'
 
 import { storageGetTasks, storageSaveTasks } from '../../storage'
 
@@ -77,7 +81,7 @@ const Dashboard = () => {
 
   return (
     <main className='to-do-list--dashboard'>
-      {!tasks.length && <p className='to-do-list--no-tasks'>There are no tasks. Add your first task!</p>}
+      {!tasks.length && <h3 className='to-do-list--no-tasks'>There are no tasks. Add your first task!</h3>}
       {!!tasks.length && <TaskItems
         tasks={tasks}
         refreshTaskList={refreshTaskList}
@@ -86,7 +90,11 @@ const Dashboard = () => {
         checkShowTaskEditingModal={checkShowTaskEditingModal}
         deleteTask={deleteTask}
                          />}
-      <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>Add task</button>
+      <div className='to-do-list--add-task-button-container'>
+        <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>
+          <IoAddCircle />
+        </button>
+      </div>
       {showAddTaskModal && <AddTaskModal addTask={addTask} checkAddTaskShowModal={checkAddTaskShowModal} />}
       {task && showTaskDetailsModal && <TaskDetailsModal task={task} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />}
       {task && showTaskEditingModal && <TaskEditingModal task={task} editTask={editTask} checkShowTaskEditingModal={checkShowTaskEditingModal} />}

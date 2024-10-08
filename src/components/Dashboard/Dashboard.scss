@@ -1,0 +1,21 @@
+$pink_primary: #E53170;
+
+.to-do-list--dashboard{
+  .to-do-list--no-tasks{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
+    color: $pink_primary;
+    margin: 0
+  }
+  .to-do-list--add-task-button-container{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 2px solid $pink_primary;
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+  }
+}

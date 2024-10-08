@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div className='to-do-list--app'>
       <header>
-        <h1 className='to-do-list--main-title'>My To do List</h1>
+        <h1 className='to-do-list--main-title'>To Do List</h1>
       </header>
       <Dashboard />
     </div>
