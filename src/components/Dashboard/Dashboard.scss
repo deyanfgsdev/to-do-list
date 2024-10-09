@@ -6,16 +6,31 @@ $pink_primary: #E53170;
     line-height: 24px;
     font-weight: 700;
     color: $pink_primary;
-    margin: 0
+    margin: 24px 0 0 0;
   }
   .to-do-list--add-task-button-container{
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
+    z-index: 1;
     border-top: 2px solid $pink_primary;
     display: flex;
     justify-content: flex-end;
-    padding: 16px;
+    .to-do-list--add-task-button-wrapper{
+      padding: 16px;
+      .to-do-list--add-task-button{
+        display: flex;
+        background-color: transparent;
+        color: $pink_primary;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+        svg{
+          width: 60px;
+          height: auto;
+        }
+      }
+    }
   }
 }

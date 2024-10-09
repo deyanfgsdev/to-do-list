@@ -91,9 +91,11 @@ const Dashboard = () => {
         deleteTask={deleteTask}
                          />}
       <div className='to-do-list--add-task-button-container'>
-        <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>
-          <IoAddCircle />
-        </button>
+        <div className='to-do-list--add-task-button-wrapper'>
+          <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>
+            <IoAddCircle />
+          </button>
+        </div>
       </div>
       {showAddTaskModal && <AddTaskModal addTask={addTask} checkAddTaskShowModal={checkAddTaskShowModal} />}
       {task && showTaskDetailsModal && <TaskDetailsModal task={task} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />}
