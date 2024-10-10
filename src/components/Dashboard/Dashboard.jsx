@@ -28,6 +28,7 @@ const Dashboard = () => {
 
   const handleAddTaskClick = () => {
     setShowAddTaskModal(true)
+    document.body.classList.add('no-scroll')
   }
 
   const saveAndSetTasks = (newTasks) => {
@@ -43,6 +44,12 @@ const Dashboard = () => {
 
   const checkAddTaskShowModal = (showModal) => {
     setShowAddTaskModal(showModal)
+
+    if (showModal) {
+      document.body.classList.add('no-scroll')
+    } else {
+      document.body.classList.remove('no-scroll')
+    }
   }
 
   const refreshTaskList = (taskToUpdate) => {
