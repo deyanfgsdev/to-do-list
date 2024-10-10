@@ -50,7 +50,7 @@ const AddTaskModal = ({ addTask, checkAddTaskShowModal }) => {
           {showTitleInputError && <p className='to-do-list--add-task-input-error'>Please enter a title</p>}
           <textarea name='description' placeholder='Enter a description...' className='to-do-list--form-field to-do-list--add-task-textarea' />
           <div className='to-do-list--add-task-form-actions'>
-            <button className='to-do-list--add-task-cancel-button'>Cancel</button>
+            <button className='to-do-list--add-task-cancel-button' onClick={handleCloseModalClick}>Cancel</button>
             <button type='submit' className='to-do-list--add-task-submit-button'>Add Task</button>
           </div>
         </form>

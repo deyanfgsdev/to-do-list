@@ -1,6 +1,7 @@
 $pink_primary: #e53170;
 $grey_primary: #787878;
 $grey_secondary: #c0c0c0;
+$red_primary: #d63232;
 
 .to-do-list--add-task-modal {
   position: fixed;
@@ -16,8 +17,15 @@ $grey_secondary: #c0c0c0;
     position: relative;
     background-color: #fff;
     border-radius: 16px;
+    width: 100%;
     max-width: 280px;
     padding: 24px 16px;
+    @media (min-width: 375px) {
+      max-width: 320px;
+    }
+    @media (min-width: 768px) {
+      max-width: 500px;
+    }
     .to-do-list--add-task-close-button {
       position: absolute;
       top: 8px;
@@ -29,7 +37,7 @@ $grey_secondary: #c0c0c0;
       padding: 0;
       cursor: pointer;
       svg {
-        width: 24px;
+        width: 32px;
         height: auto;
       }
     }
@@ -57,6 +65,7 @@ $grey_secondary: #c0c0c0;
         outline: none;
         padding: 8px 16px;
         box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
         font-size: 14px;
         line-height: 18px;
         &::placeholder {
@@ -71,6 +80,14 @@ $grey_secondary: #c0c0c0;
       }
       .to-do-list--add-task-textarea {
         height: 100px;
+        resize: none;
+      }
+      .to-do-list--add-task-input-error {
+        color: $red_primary;
+        font-size: 12px;
+        line-height: 16px;
+        width: 100%;
+        margin: 8px 0;
       }
       .to-do-list--add-task-form-actions {
         display: flex;
