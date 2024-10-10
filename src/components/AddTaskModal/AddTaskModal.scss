@@ -101,6 +101,7 @@ $red_primary: #d63232;
           line-height: 20px;
           border-radius: 4px;
           border: none;
+          cursor: pointer;
           &.to-do-list--add-task-cancel-button {
             background-color: transparent;
             border: 1px solid $pink_primary;
