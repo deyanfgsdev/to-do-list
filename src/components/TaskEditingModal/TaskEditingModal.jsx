@@ -44,6 +44,12 @@ const TaskEditingModal = ({ task, editTask, checkShowTaskEditingModal }) => {
     const { value } = event.target
 
     setTaskForm({ ...taskForm, taskTitle: value })
+
+    if (!value) {
+      setShowTitleInputError(true)
+    } else {
+      setShowTitleInputError(false)
+    }
   }
 
   const handleDescriptionChange = (event) => {
