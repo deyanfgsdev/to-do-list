@@ -1,6 +1,7 @@
 $pink_primary: #e53170;
 
 .to-do-list--dashboard {
+  margin-top: 32px;
   .to-do-list--no-tasks {
     font-size: 20px;
     line-height: 24px;
@@ -14,6 +15,7 @@ $pink_primary: #e53170;
     left: 0;
     width: 100%;
     z-index: 1;
+    background-color: #fff;
     border-top: 2px solid $pink_primary;
     display: flex;
     justify-content: flex-end;

@@ -1,0 +1,120 @@
+$grey_primary: #e5e5e5;
+$grey_secondary: #c0c0c0;
+$grey_tertiary: #0f0e17;
+$pink_primary: #e53170;
+
+li {
+  list-style: none;
+  & + li {
+    margin-top: 16px;
+  }
+  .to-do-list--task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    box-shadow: 0 0 10px #e5e5e5;
+    border-radius: 8px;
+    .to-do-list--task-item-info-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      .to-do-list--task-checkbox-wrapper {
+        .to-do-list--task-checkbox-input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+          margin: 0;
+          & + label {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 25px;
+              height: 25px;
+              border: 2px solid $grey_secondary;
+              background: #fff;
+              border-radius: 4px;
+            }
+          }
+          &:checked {
+            & + label {
+              &::after {
+                content: '✓';
+                position: absolute;
+                left: 5px;
+                top: 1px;
+                font-size: 20px;
+                color: $pink_primary;
+              }
+            }
+          }
+        }
+      }
+      .to-do-list--task-item-info {
+        max-width: 120px;
+        @media (min-width: 375px) {
+          max-width: 175px;
+        }
+        @media (min-width: 768px) {
+          max-width: 550px;
+        }
+        @media (min-width: 992px) {
+          max-width: 620px;
+        }
+        @media (min-width: 1200px) {
+          max-width: 820px;
+        }
+        .to-do-list--task-title {
+          font-size: 20px;
+          line-height: 24px;
+          color: $grey_tertiary;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin: 0;
+          &.to-do-list--completed-task {
+            text-decoration: line-through;
+          }
+        }
+        .to-do-list--task-description {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 16px;
+          line-height: 20px;
+          color: $grey_secondary;
+          margin: 8px 0 0 0;
+        }
+      }
+    }
+    .to-do-list--task-item-actions {
+      display: flex;
+      gap: 8px;
+      button {
+        display: flex;
+        background-color: transparent;
+        color: $pink_primary;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+        svg {
+          width: 20px;
+          height: auto;
+          @media (min-width: 768px) {
+            width: 25px;
+          }
+        }
+      }
+    }
+  }
+}

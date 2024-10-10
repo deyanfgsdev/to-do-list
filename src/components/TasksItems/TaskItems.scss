@@ -1,0 +1,14 @@
+.to-do-list--tasks-items {
+  margin-bottom: 94px;
+  @media (min-width: 992px) {
+    max-width: 800px;
+    margin: 0 auto 94px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 1000px;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+}

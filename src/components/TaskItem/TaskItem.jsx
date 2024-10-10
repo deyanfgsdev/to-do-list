@@ -1,12 +1,20 @@
 import { useState } from 'react'
 
+import './TaskItem.scss'
+
+import { FaRegEye } from 'react-icons/fa'
+import { GoPencil } from 'react-icons/go'
+import { MdDeleteOutline } from 'react-icons/md'
+
 const TaskItem = ({ task, refreshTaskList, setTaskDetails, checkShowTaskDetailsModal, checkShowTaskEditingModal, deleteTask }) => {
-  const { title, description, isCompleted } = task
+  const { id, title, description, isCompleted } = task
   const initialIsCompleted = isCompleted
 
   const [taskCompleted, setTaskCompleted] = useState(initialIsCompleted)
 
-  const handleTaskStateChange = () => {
+  const titleClassName = taskCompleted ? 'to-do-list--task-title to-do-list--completed-task' : 'to-do-list--task-title'
+
+  const handleTaskStateChange = (event) => {
     setTaskCompleted(!taskCompleted)
 
     const updatedTask = { ...task, isCompleted: !taskCompleted }
@@ -30,15 +38,26 @@ const TaskItem = ({ task, refreshTaskList, setTaskDetails, checkShowTaskDetailsM
   return (
     <li>
       <div className='to-do-list--task-item'>
-        <div className='to-do-list--task-item-info'>
-          <input type='checkbox' checked={taskCompleted} onChange={handleTaskStateChange} />
-          <h3>{title}</h3>
-          <p>{description}</p>
+        <div className='to-do-list--task-item-info-container'>
+          <div className='to-do-list--task-checkbox-wrapper'>
+            <input type='checkbox' checked={taskCompleted} id={`to-do-list--task-checkbox-${id}`} className='to-do-list--task-checkbox-input' onChange={handleTaskStateChange} />
+            <label htmlFor={`to-do-list--task-checkbox-${id}`} />
+          </div>
+          <div className='to-do-list--task-item-info'>
+            <h3 className={titleClassName}>{title}</h3>
+            <p className='to-do-list--task-description'>{description}</p>
+          </div>
         </div>
         <div className='to-do-list--task-item-actions'>
-          <button onClick={handleDetailsClick}>Details</button>
-          <button onClick={handleEditClick}>Edit</button>
-          <button onClick={handleDeleteClick}>Delete</button>
+          <button onClick={handleDetailsClick}>
+            <FaRegEye />
+          </button>
+          <button onClick={handleEditClick}>
+            <GoPencil />
+          </button>
+          <button onClick={handleDeleteClick}>
+            <MdDeleteOutline />
+          </button>
         </div>
       </div>
     </li>

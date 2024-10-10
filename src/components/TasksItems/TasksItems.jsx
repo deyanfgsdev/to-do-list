@@ -1,5 +1,7 @@
 import TaskItem from '../TaskItem/TaskItem'
 
+import './TaskItems.scss'
+
 const TaskItems = ({ tasks, refreshTaskList, setTaskDetails, checkShowTaskDetailsModal, taskToEdit, checkShowTaskEditingModal, deleteTask }) => {
   return (
     <div className='to-do-list--tasks-items'>
