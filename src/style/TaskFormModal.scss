@@ -46,7 +46,7 @@ $red_primary: #d63232;
       line-height: 30px;
       color: #000;
       text-align: center;
-      margin: 16px 0 0 0;
+      margin: 24px 0 0 0;
     }
     .to-do-list--task-form {
       margin-top: 24px;
@@ -81,6 +81,11 @@ $red_primary: #d63232;
       .to-do-list--task-textarea {
         height: 100px;
         resize: none;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
       .to-do-list--task-input-error {
         color: $red_primary;

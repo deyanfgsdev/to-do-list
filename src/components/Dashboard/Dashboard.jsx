@@ -90,6 +90,12 @@ const Dashboard = () => {
 
   const checkShowTaskDetailsModal = (showModal) => {
     setShowTaskDetailsModal(showModal)
+
+    if (showModal) {
+      document.body.classList.add('no-scroll')
+    } else {
+      document.body.classList.remove('no-scroll')
+    }
   }
 
   return (
