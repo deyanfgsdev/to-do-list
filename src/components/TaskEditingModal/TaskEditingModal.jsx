@@ -1,5 +1,9 @@
 import { useState } from 'react'
 
+import { IoCloseOutline } from 'react-icons/io5'
+
+import '../../style/TaskFormModal.scss'
+
 const TaskEditingModal = ({ task, editTask, checkShowTaskEditingModal }) => {
   const { id, title, description } = task
   const initialTaskTitle = title
@@ -49,15 +53,20 @@ const TaskEditingModal = ({ task, editTask, checkShowTaskEditingModal }) => {
   }
 
   return (
-    <div className='to-do-list--edit-task-modal'>
-      <div className='to-do-list--edit-task-modal-body'>
-        <button className='to-do-list--edit-task-close-button' onClick={handleCloseModalClick}>X</button>
-        <h2 className='to-do-list--edit-task-modal-title'>Edit task</h2>
-        <form className='to-do-list--edit-task-form' onSubmit={handleSubmit}>
-          <input type='text' value={taskForm.taskTitle} name='title' placeholder='Enter a title' className='to-do-list--edit-task-input' onChange={handleTitleChange} />
-          {showTitleInputError && <p className='to-do-list--edit-task-input-error'>Please enter a title</p>}
-          <textarea value={taskForm.taskDescription} name='description' placeholder='Enter a description' className='to-do-list--edit-task-textarea' onChange={handleDescriptionChange} />
-          <button type='submit' className='to-do-list--edit-task-submit-button'>Edit task</button>
+    <div className='to-do-list--task-modal'>
+      <div className='to-do-list--task-modal-body'>
+        <button className='to-do-list--task-close-button' onClick={handleCloseModalClick}>
+          <IoCloseOutline />
+        </button>
+        <h2 className='to-do-list--task-modal-title'>Edit Task</h2>
+        <form className='to-do-list--task-form' onSubmit={handleSubmit}>
+          <input type='text' value={taskForm.taskTitle} name='title' placeholder='Enter a title...' className='to-do-list--form-field to-do-list--task-input' onChange={handleTitleChange} />
+          {showTitleInputError && <p className='to-do-list--task-input-error'>Please enter a title</p>}
+          <textarea value={taskForm.taskDescription} name='description' placeholder='Enter a description...' className='to-do-list--form-field to-do-list--task-textarea' onChange={handleDescriptionChange} />
+          <div className='to-do-list--task-form-actions'>
+            <button className='to-do-list--task-cancel-button' onClick={handleCloseModalClick}>Cancel</button>
+            <button type='submit' className='to-do-list--task-submit-button'>Edit Task</button>
+          </div>
         </form>
       </div>
     </div>

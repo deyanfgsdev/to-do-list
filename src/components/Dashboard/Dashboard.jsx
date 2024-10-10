@@ -70,6 +70,12 @@ const Dashboard = () => {
 
   const checkShowTaskEditingModal = (showModal) => {
     setShowTaskEditingModal(showModal)
+
+    if (showModal) {
+      document.body.classList.add('no-scroll')
+    } else {
+      document.body.classList.remove('no-scroll')
+    }
   }
 
   const deleteTask = (taskToDelete) => {
