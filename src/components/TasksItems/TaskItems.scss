@@ -1,8 +1,7 @@
 .to-do-list--tasks-items {
-  margin-bottom: 94px;
+  margin: 24px auto 0;
   @media (min-width: 992px) {
     max-width: 800px;
-    margin: 0 auto 94px;
   }
   @media (min-width: 1200px) {
     max-width: 1000px;

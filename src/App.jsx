@@ -1,5 +1,6 @@
 import './App.scss'
 import Dashboard from './components/Dashboard/Dashboard'
+import Footer from './components/Footer/Footer'
 
 const App = () => {
   return (
@@ -8,6 +9,7 @@ const App = () => {
         <h1 className='to-do-list--main-title'>To Do List</h1>
       </header>
       <Dashboard />
+      <Footer />
     </div>
   )
 }

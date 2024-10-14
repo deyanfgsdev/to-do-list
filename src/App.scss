@@ -1,8 +1,10 @@
 .to-do-list--app {
-  padding: 16px;
+  position: relative;
   header {
+    padding: 16px 16px 0 16px;
     @media (min-width: 992px) {
       max-width: 800px;
+      padding: 16px 0 0 0;
       margin: 0 auto;
     }
     @media (min-width: 1200px) {
