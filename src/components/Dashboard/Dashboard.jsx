@@ -110,7 +110,8 @@ const Dashboard = () => {
         deleteTask={deleteTask}
                          />}
       <div className='to-do-list--add-task-button-container'>
-        {tasks.length && <span className='to-do-list--current-tasks'>{`${tasks.length} ${tasks.length > 0 ? 'Tasks' : 'Task'}`}</span>}
+        {!tasks.length && <span className='to-do-list--current-tasks'>0 Tasks</span>}
+        {!!tasks.length && <span className='to-do-list--current-tasks'>{`${tasks.length} ${tasks.length > 1 ? 'Tasks' : 'Task'}`}</span>}
         <div className='to-do-list--add-task-button-wrapper'>
           <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>
             <IoAddCircle />

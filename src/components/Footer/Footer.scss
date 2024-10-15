@@ -1,7 +1,7 @@
 $pink_primary: #e53170;
 
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -11,6 +11,7 @@ footer {
   align-items: center;
   gap: 16px;
   padding: 16px;
+  margin-bottom: 78px;
   @media (min-width: 768px) {
     flex-direction: row;
     justify-content: space-between;
