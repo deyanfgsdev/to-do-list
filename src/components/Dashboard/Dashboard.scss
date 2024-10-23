@@ -1,7 +1,7 @@
 $pink_primary: #e53170;
 
 .to-do-list--dashboard {
-  height: calc(100vh - 78px);
+  height: calc(100vh - 76px);
   padding: 0 16px;
   .to-do-list--no-tasks {
     font-size: 20px;
@@ -33,19 +33,17 @@ $pink_primary: #e53170;
         line-height: 24px;
       }
     }
-    .to-do-list--add-task-button-wrapper {
-      padding: 8px 8px 8px 0;
-      .to-do-list--add-task-button {
-        display: flex;
-        background-color: transparent;
-        color: $pink_primary;
-        padding: 0;
-        border: none;
-        cursor: pointer;
-        svg {
-          width: 60px;
-          height: auto;
-        }
+    .to-do-list--add-task-button {
+      display: flex;
+      background-color: transparent;
+      color: $pink_primary;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin: 8px 8px 8px 0;
+      svg {
+        width: 60px;
+        height: auto;
       }
     }
   }
