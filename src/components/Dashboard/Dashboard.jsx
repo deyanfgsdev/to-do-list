@@ -57,7 +57,7 @@ const Dashboard = () => {
     saveAndSetTasks(newTasks)
   }
 
-  const setTaskDetails = (task) => {
+  const updateTaskDetails = (task) => {
     setTask(task)
   }
 
@@ -93,7 +93,7 @@ const Dashboard = () => {
       {!!tasks.length && <TaskItems
         tasks={tasks}
         refreshTaskList={refreshTaskList}
-        setTaskDetails={setTaskDetails}
+        updateTaskDetails={updateTaskDetails}
         openTaskDetailsModal={openTaskDetailsModal}
         openTaskEditingModal={openTaskEditingModal}
         deleteTask={deleteTask}
