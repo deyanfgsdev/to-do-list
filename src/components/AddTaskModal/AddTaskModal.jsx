@@ -21,7 +21,7 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
     }
   }, [isAddTaskModalOpen])
 
-  const handleCloseModalClick = () => {
+  const handleCloseModal = () => {
     onAddTaskModalClose()
   }
 
@@ -63,8 +63,8 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
   }
 
   return (
-    <dialog className='to-do-list--task-modal' ref={dialogRef}>
-      <button className='to-do-list--task-close-button' autoFocus onClick={handleCloseModalClick}>
+    <dialog className='to-do-list--task-modal' ref={dialogRef} onClose={handleCloseModal}>
+      <button className='to-do-list--task-close-button' autoFocus onClick={handleCloseModal}>
         <IoCloseOutline />
       </button>
       <h2 className='to-do-list--task-modal-title'>New Task</h2>
@@ -73,7 +73,7 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
         {showTitleInputError && <p className='to-do-list--task-input-error'>Please enter a title</p>}
         <textarea name='description' placeholder='Enter a description...' className='to-do-list--form-field to-do-list--task-textarea' />
         <div className='to-do-list--task-form-actions'>
-          <button className='to-do-list--task-cancel-button' onClick={handleCloseModalClick}>Cancel</button>
+          <button className='to-do-list--task-cancel-button' onClick={handleCloseModal}>Cancel</button>
           <button type='submit' className='to-do-list--task-submit-button'>Add Task</button>
         </div>
       </form>
