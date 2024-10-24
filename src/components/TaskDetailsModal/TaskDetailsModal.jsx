@@ -18,12 +18,20 @@ const TaskDetailsModal = ({ task, isTaskDetailsModalOpen, onTaskDetailsModalClos
     }
   }, [isTaskDetailsModalOpen])
 
+  const handleDialogClick = (event) => {
+    const { target } = event
+
+    if (target === dialogRef.current) {
+      onTaskDetailsModalClose()
+    }
+  }
+
   const handleCloseModal = () => {
     onTaskDetailsModalClose()
   }
 
   return (
-    <dialog className='to-do-list--task-details-modal' ref={dialogRef} onClose={handleCloseModal}>
+    <dialog className='to-do-list--task-details-modal' ref={dialogRef} onClick={handleDialogClick} onClose={handleCloseModal}>
       <button className='to-do-list--task-close-button' autoFocus onClick={handleCloseModal}>
         <IoCloseOutline />
       </button>
