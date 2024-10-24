@@ -2,61 +2,53 @@ $pink_primary: #e53170;
 $grey_primary: #787878;
 
 .to-do-list--task-details-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
+  background-color: #fff;
+  border: 0;
+  border-radius: 16px;
   width: 100%;
-  height: 100%;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: grid;
-  place-items: center;
-  .to-do-list--task-details-modal-body {
-    position: relative;
-    background-color: #fff;
-    border-radius: 16px;
-    width: 100%;
-    max-width: 280px;
-    padding: 24px 16px;
-    @media (min-width: 375px) {
-      max-width: 320px;
+  max-width: 280px;
+  padding: 24px 16px;
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  @media (min-width: 375px) {
+    max-width: 320px;
+  }
+  @media (min-width: 768px) {
+    max-width: 500px;
+  }
+  .to-do-list--task-close-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: transparent;
+    color: $pink_primary;
+    border: none;
+    display: flex;
+    padding: 0;
+    cursor: pointer;
+    svg {
+      width: 32px;
+      height: auto;
     }
-    @media (min-width: 768px) {
-      max-width: 500px;
-    }
-    .to-do-list--task-close-button {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background-color: transparent;
-      color: $pink_primary;
-      border: none;
-      display: flex;
-      padding: 0;
-      cursor: pointer;
-      svg {
-        width: 32px;
-        height: auto;
-      }
-    }
-    .to-do-list--task-details-modal-title {
-      font-size: 26px;
-      line-height: 30px;
-      color: #000;
-      margin: 24px 0 0 0;
-    }
-    .to-do-list--task-details-modal-description {
-      font-size: 16px;
-      line-height: 20px;
-      color: $grey_primary;
-      max-height: 300px;
-      overflow: scroll;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      margin-top: 16px;
-      &::-webkit-scrollbar {
-        display: none;
-      }
+  }
+  .to-do-list--task-details-modal-title {
+    font-size: 26px;
+    line-height: 30px;
+    color: #000;
+    margin: 24px 0 0 0;
+  }
+  .to-do-list--task-details-modal-description {
+    font-size: 16px;
+    line-height: 20px;
+    color: $grey_primary;
+    max-height: 300px;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-top: 16px;
+    &::-webkit-scrollbar {
+      display: none;
     }
   }
 }

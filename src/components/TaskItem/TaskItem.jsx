@@ -6,7 +6,7 @@ import { FaRegEye } from 'react-icons/fa'
 import { GoPencil } from 'react-icons/go'
 import { MdDeleteOutline } from 'react-icons/md'
 
-const TaskItem = ({ task, refreshTaskList, setTaskDetails, checkShowTaskDetailsModal, checkShowTaskEditingModal, deleteTask }) => {
+const TaskItem = ({ task, refreshTaskList, setTaskDetails, openTaskDetailsModal, checkShowTaskEditingModal, deleteTask }) => {
   const { id, title, description, isCompleted } = task
   const initialIsCompleted = isCompleted
 
@@ -23,7 +23,7 @@ const TaskItem = ({ task, refreshTaskList, setTaskDetails, checkShowTaskDetailsM
 
   const handleDetailsClick = () => {
     setTaskDetails(task)
-    checkShowTaskDetailsModal(true)
+    openTaskDetailsModal()
   }
 
   const handleEditClick = () => {

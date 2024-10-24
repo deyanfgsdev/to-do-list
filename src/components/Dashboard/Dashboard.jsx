@@ -23,17 +23,15 @@ const Dashboard = () => {
   })
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false)
   const [task, setTask] = useState(null)
-  const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
+  const [isTaskDetailsModalOpen, setIsTaskDetailsModalOpen] = useState(false)
   const [showTaskEditingModal, setShowTaskEditingModal] = useState(false)
 
   const handleAddTaskClick = () => {
     setIsAddTaskModalOpen(true)
-    document.body.classList.add('no-scroll')
   }
 
   const onAddTaskModalClose = () => {
     setIsAddTaskModalOpen(false)
-    document.body.classList.remove('no-scroll')
   }
 
   const saveAndSetTasks = (newTasks) => {
@@ -46,17 +44,6 @@ const Dashboard = () => {
 
     saveAndSetTasks(newTasks)
   }
-
-  /*
-  const checkAddTaskShowModal = (showModal) => {
-    setShowAddTaskModal(showModal)
-
-    if (showModal) {
-      document.body.classList.add('no-scroll')
-    } else {
-      document.body.classList.remove('no-scroll')
-    }
-  } */
 
   const refreshTaskList = (taskToUpdate) => {
     const newTasks = tasks.map((task) => {
@@ -94,14 +81,12 @@ const Dashboard = () => {
     refreshTaskList(taskToEdit)
   }
 
-  const checkShowTaskDetailsModal = (showModal) => {
-    setShowTaskDetailsModal(showModal)
+  const openTaskDetailsModal = () => {
+    setIsTaskDetailsModalOpen(true)
+  }
 
-    if (showModal) {
-      document.body.classList.add('no-scroll')
-    } else {
-      document.body.classList.remove('no-scroll')
-    }
+  const onTaskDetailsModalClose = () => {
+    setIsTaskDetailsModalOpen(false)
   }
 
   return (
@@ -111,7 +96,7 @@ const Dashboard = () => {
         tasks={tasks}
         refreshTaskList={refreshTaskList}
         setTaskDetails={setTaskDetails}
-        checkShowTaskDetailsModal={checkShowTaskDetailsModal}
+        openTaskDetailsModal={openTaskDetailsModal}
         checkShowTaskEditingModal={checkShowTaskEditingModal}
         deleteTask={deleteTask}
                          />}
@@ -123,7 +108,7 @@ const Dashboard = () => {
         </button>
       </div>
       <AddTaskModal addTask={addTask} isAddTaskModalOpen={isAddTaskModalOpen} onAddTaskModalClose={onAddTaskModalClose} />
-      {task && showTaskDetailsModal && <TaskDetailsModal task={task} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />}
+      {task && <TaskDetailsModal task={task} isTaskDetailsModalOpen={isTaskDetailsModalOpen} onTaskDetailsModalClose={onTaskDetailsModalClose} />}
       {task && showTaskEditingModal && <TaskEditingModal task={task} editTask={editTask} checkShowTaskEditingModal={checkShowTaskEditingModal} />}
     </main>
   )
