@@ -24,7 +24,7 @@ const Dashboard = () => {
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false)
   const [task, setTask] = useState(null)
   const [isTaskDetailsModalOpen, setIsTaskDetailsModalOpen] = useState(false)
-  const [showTaskEditingModal, setShowTaskEditingModal] = useState(false)
+  const [isTaskEditingModalOpen, setIsTaskEditingModalOpen] = useState(false)
 
   const handleAddTaskClick = () => {
     setIsAddTaskModalOpen(true)
@@ -61,14 +61,12 @@ const Dashboard = () => {
     setTask(task)
   }
 
-  const checkShowTaskEditingModal = (showModal) => {
-    setShowTaskEditingModal(showModal)
+  const openTaskDetailsModal = () => {
+    setIsTaskDetailsModalOpen(true)
+  }
 
-    if (showModal) {
-      document.body.classList.add('no-scroll')
-    } else {
-      document.body.classList.remove('no-scroll')
-    }
+  const openTaskEditingModal = () => {
+    setIsTaskEditingModalOpen(true)
   }
 
   const deleteTask = (taskToDelete) => {
@@ -77,16 +75,16 @@ const Dashboard = () => {
     saveAndSetTasks(newTasks)
   }
 
+  const onTaskDetailsModalClose = () => {
+    setIsTaskDetailsModalOpen(false)
+  }
+
   const editTask = (taskToEdit) => {
     refreshTaskList(taskToEdit)
   }
 
-  const openTaskDetailsModal = () => {
-    setIsTaskDetailsModalOpen(true)
-  }
-
-  const onTaskDetailsModalClose = () => {
-    setIsTaskDetailsModalOpen(false)
+  const onTaskEditingModalClose = () => {
+    setIsTaskEditingModalOpen(false)
   }
 
   return (
@@ -97,7 +95,7 @@ const Dashboard = () => {
         refreshTaskList={refreshTaskList}
         setTaskDetails={setTaskDetails}
         openTaskDetailsModal={openTaskDetailsModal}
-        checkShowTaskEditingModal={checkShowTaskEditingModal}
+        openTaskEditingModal={openTaskEditingModal}
         deleteTask={deleteTask}
                          />}
       <div className='to-do-list--add-task-button-container'>
@@ -109,7 +107,7 @@ const Dashboard = () => {
       </div>
       <AddTaskModal addTask={addTask} isAddTaskModalOpen={isAddTaskModalOpen} onAddTaskModalClose={onAddTaskModalClose} />
       {task && <TaskDetailsModal task={task} isTaskDetailsModalOpen={isTaskDetailsModalOpen} onTaskDetailsModalClose={onTaskDetailsModalClose} />}
-      {task && showTaskEditingModal && <TaskEditingModal task={task} editTask={editTask} checkShowTaskEditingModal={checkShowTaskEditingModal} />}
+      {task && <TaskEditingModal task={task} editTask={editTask} isTaskEditingModalOpen={isTaskEditingModalOpen} onTaskEditingModalClose={onTaskEditingModalClose} />}
     </main>
   )
 }
