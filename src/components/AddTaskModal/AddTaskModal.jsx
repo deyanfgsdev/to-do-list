@@ -14,8 +14,10 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
   useEffect(() => {
     if (isAddTaskModalOpen) {
       dialogRef.current?.showModal()
+      document.body.classList.add('no-scroll')
     } else {
       dialogRef.current?.close()
+      document.body.classList.remove('no-scroll')
     }
   }, [isAddTaskModalOpen])
 
