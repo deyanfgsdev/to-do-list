@@ -4,117 +4,110 @@ $grey_secondary: #c0c0c0;
 $red_primary: #d63232;
 
 .to-do-list--task-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
+  background-color: #fff;
+  border: 0;
+  border-radius: 16px;
   width: 100%;
-  height: 100%;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: grid;
-  place-items: center;
-  .to-do-list--task-modal-body {
-    position: relative;
-    background-color: #fff;
-    border-radius: 16px;
-    width: 100%;
-    max-width: 280px;
-    padding: 24px 16px;
-    @media (min-width: 375px) {
-      max-width: 320px;
+  max-width: 280px;
+  padding: 24px 16px;
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  @media (min-width: 375px) {
+    max-width: 320px;
+  }
+  @media (min-width: 768px) {
+    max-width: 500px;
+  }
+  .to-do-list--task-close-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: transparent;
+    color: $pink_primary;
+    border: none;
+    display: flex;
+    padding: 0;
+    cursor: pointer;
+    svg {
+      width: 32px;
+      height: auto;
     }
-    @media (min-width: 768px) {
-      max-width: 500px;
+  }
+  .to-do-list--task-modal-title {
+    font-size: 26px;
+    line-height: 30px;
+    color: #000;
+    text-align: center;
+    margin: 24px 0 0 0;
+  }
+  .to-do-list--task-form {
+    margin-top: 24px;
+    .to-do-list--form-field {
+      & + .to-do-list--form-field {
+        margin-top: 16px;
+      }
     }
-    .to-do-list--task-close-button {
-      position: absolute;
-      top: 8px;
-      right: 8px;
+    .to-do-list--task-input,
+    .to-do-list--task-textarea {
+      width: 100%;
+      border: 2px solid $pink_primary;
       background-color: transparent;
-      color: $pink_primary;
-      border: none;
-      display: flex;
-      padding: 0;
-      cursor: pointer;
-      svg {
-        width: 32px;
-        height: auto;
-      }
-    }
-    .to-do-list--task-modal-title {
-      font-size: 26px;
-      line-height: 30px;
       color: #000;
-      text-align: center;
-      margin: 24px 0 0 0;
+      border-radius: 4px;
+      outline: none;
+      padding: 8px 16px;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      &::placeholder {
+        color: $grey_secondary;
+      }
+      &::-ms-input-placeholder {
+        color: $grey_secondary;
+      }
+      &::-webkit-input-placeholder {
+        color: $grey_secondary;
+      }
     }
-    .to-do-list--task-form {
-      margin-top: 24px;
-      .to-do-list--form-field {
-        & + .to-do-list--form-field {
-          margin-top: 16px;
-        }
+    .to-do-list--task-textarea {
+      height: 100px;
+      resize: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      &::-webkit-scrollbar {
+        display: none;
       }
-      .to-do-list--task-input,
-      .to-do-list--task-textarea {
-        width: 100%;
-        border: 2px solid $pink_primary;
-        background-color: transparent;
-        color: #000;
-        border-radius: 4px;
-        outline: none;
+    }
+    .to-do-list--task-input-error {
+      color: $red_primary;
+      font-size: 12px;
+      line-height: 16px;
+      width: 100%;
+      margin: 8px 0;
+    }
+    .to-do-list--task-form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 8px;
+      button {
+        width: fit-content;
         padding: 8px 16px;
-        box-sizing: border-box;
-        font-family: 'Roboto', sans-serif;
-        font-size: 14px;
-        line-height: 18px;
-        &::placeholder {
-          color: $grey_secondary;
+        font-size: 16px;
+        line-height: 20px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        &.to-do-list--task-cancel-button {
+          background-color: transparent;
+          border: 1px solid $pink_primary;
+          color: $grey_primary;
         }
-        &::-ms-input-placeholder {
-          color: $grey_secondary;
-        }
-        &::-webkit-input-placeholder {
-          color: $grey_secondary;
-        }
-      }
-      .to-do-list--task-textarea {
-        height: 100px;
-        resize: none;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      }
-      .to-do-list--task-input-error {
-        color: $red_primary;
-        font-size: 12px;
-        line-height: 16px;
-        width: 100%;
-        margin: 8px 0;
-      }
-      .to-do-list--task-form-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 8px;
-        margin-top: 8px;
-        button {
-          width: fit-content;
-          padding: 8px 16px;
-          font-size: 16px;
-          line-height: 20px;
-          border-radius: 4px;
-          border: none;
-          cursor: pointer;
-          &.to-do-list--task-cancel-button {
-            background-color: transparent;
-            border: 1px solid $pink_primary;
-            color: $grey_primary;
-          }
-          &.to-do-list--task-submit-button {
-            background-color: $pink_primary;
-          }
+        &.to-do-list--task-submit-button {
+          background-color: $pink_primary;
         }
       }
     }

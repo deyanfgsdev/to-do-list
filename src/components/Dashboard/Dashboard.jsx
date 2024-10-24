@@ -21,14 +21,19 @@ const Dashboard = () => {
 
     return []
   })
-  const [showAddTaskModal, setShowAddTaskModal] = useState(false)
+  const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false)
   const [task, setTask] = useState(null)
   const [showTaskDetailsModal, setShowTaskDetailsModal] = useState(false)
   const [showTaskEditingModal, setShowTaskEditingModal] = useState(false)
 
   const handleAddTaskClick = () => {
-    setShowAddTaskModal(true)
+    setIsAddTaskModalOpen(true)
     document.body.classList.add('no-scroll')
+  }
+
+  const onAddTaskModalClose = () => {
+    setIsAddTaskModalOpen(false)
+    document.body.classList.remove('no-scroll')
   }
 
   const saveAndSetTasks = (newTasks) => {
@@ -42,6 +47,7 @@ const Dashboard = () => {
     saveAndSetTasks(newTasks)
   }
 
+  /*
   const checkAddTaskShowModal = (showModal) => {
     setShowAddTaskModal(showModal)
 
@@ -50,7 +56,7 @@ const Dashboard = () => {
     } else {
       document.body.classList.remove('no-scroll')
     }
-  }
+  } */
 
   const refreshTaskList = (taskToUpdate) => {
     const newTasks = tasks.map((task) => {
@@ -116,7 +122,7 @@ const Dashboard = () => {
           <IoAddCircle />
         </button>
       </div>
-      {showAddTaskModal && <AddTaskModal addTask={addTask} checkAddTaskShowModal={checkAddTaskShowModal} />}
+      <AddTaskModal addTask={addTask} isAddTaskModalOpen={isAddTaskModalOpen} onAddTaskModalClose={onAddTaskModalClose} />
       {task && showTaskDetailsModal && <TaskDetailsModal task={task} checkShowTaskDetailsModal={checkShowTaskDetailsModal} />}
       {task && showTaskEditingModal && <TaskEditingModal task={task} editTask={editTask} checkShowTaskEditingModal={checkShowTaskEditingModal} />}
     </main>
