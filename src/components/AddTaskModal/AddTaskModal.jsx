@@ -114,7 +114,7 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
         {showTitleInputError && <p className='to-do-list--task-input-error'>Please enter a title</p>}
         <textarea value={taskForm.taskDescription} name='description' placeholder='Enter a description...' className='to-do-list--form-field to-do-list--task-textarea' onChange={handleDescriptionChange} />
         <div className='to-do-list--task-form-actions'>
-          <button className='to-do-list--task-cancel-button' onClick={handleCloseModal}>Cancel</button>
+          <button type='button' className='to-do-list--task-cancel-button' onClick={handleCloseModal}>Cancel</button>
           <button type='submit' className='to-do-list--task-submit-button'>Add Task</button>
         </div>
       </form>
