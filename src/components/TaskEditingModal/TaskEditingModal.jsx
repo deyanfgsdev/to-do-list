@@ -6,21 +6,29 @@ import '../../style/TaskFormModal.scss'
 
 const TaskEditingModal = ({ task, editTask, isTaskEditingModalOpen, onTaskEditingModalClose }) => {
   const { id, title, description } = task
-  const initialTaskTitle = title
-  const initialTaskDescription = description
 
   const [taskForm, setTaskForm] = useState({
-    taskTitle: initialTaskTitle,
-    taskDescription: initialTaskDescription
+    taskTitle: '',
+    taskDescription: ''
   })
   const [showTitleInputError, setShowTitleInputError] = useState(false)
   const dialogRef = useRef(null)
 
   useEffect(() => {
     if (isTaskEditingModalOpen) {
+      setTaskForm({
+        taskTitle: title,
+        taskDescription: description
+      })
+
       dialogRef.current?.showModal()
       document.body.classList.add('no-scroll')
     } else {
+      setTaskForm({
+        taskTitle: '',
+        taskDescription: ''
+      })
+
       dialogRef.current?.close()
       document.body.classList.remove('no-scroll')
     }
