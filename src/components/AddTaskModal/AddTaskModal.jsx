@@ -22,6 +22,7 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
       }
 
       setTaskForm(newTaskForm)
+      setShowTitleInputError(false)
     }
 
     resetTaskFormFields()
