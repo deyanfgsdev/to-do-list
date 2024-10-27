@@ -6,28 +6,24 @@ import { IoCloseOutline } from 'react-icons/io5'
 
 import '../../style/TaskFormModal.scss'
 
+const INITIAL_TASK_FORM = {
+  taskTitle: '',
+  taskDescription: ''
+}
+
 const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
   const dialogRef = useRef(null)
-  const [taskForm, setTaskForm] = useState({
-    taskTitle: '',
-    taskDescription: ''
-  })
+  const [taskForm, setTaskForm] = useState(INITIAL_TASK_FORM)
   const [showTitleInputError, setShowTitleInputError] = useState(false)
 
   useEffect(() => {
     const resetTaskFormFields = () => {
-      const newTaskForm = {
-        taskTitle: '',
-        taskDescription: ''
-      }
-
-      setTaskForm(newTaskForm)
+      setTaskForm(INITIAL_TASK_FORM)
       setShowTitleInputError(false)
     }
 
-    resetTaskFormFields()
-
     if (isAddTaskModalOpen) {
+      resetTaskFormFields()
       dialogRef.current?.showModal()
       document.body.classList.add('no-scroll')
     } else {
@@ -36,17 +32,14 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
     }
   }, [isAddTaskModalOpen])
 
-  // WIP: FIX ABOUT THIS
-  /*
   const handleDialogClick = (event) => {
-    const { target, currentTarget } = event
+    const { currentTarget, clientX, clientY } = event
+    const { top, right, bottom, left } = currentTarget.getBoundingClientRect()
 
-    console.log(target, currentTarget)
-
-    if (target === dialogRef.current && target === currentTarget) {
+    if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
       onAddTaskModalClose()
     }
-  } */
+  }
 
   const handleCloseModal = () => {
     onAddTaskModalClose()
@@ -104,7 +97,7 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
   }
 
   return (
-    <dialog className='to-do-list--task-modal' ref={dialogRef} onClose={handleCloseModal}>
+    <dialog className='to-do-list--task-modal' ref={dialogRef} onClick={handleDialogClick}>
       <button className='to-do-list--task-close-button' autoFocus onClick={handleCloseModal}>
         <IoCloseOutline />
       </button>
