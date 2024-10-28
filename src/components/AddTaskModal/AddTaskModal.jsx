@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+
+import Modal from '../Modal/Modal'
 
 import { v4 as uuidv4 } from 'uuid'
-
-import { IoCloseOutline } from 'react-icons/io5'
 
 import '../../style/TaskFormModal.scss'
 
@@ -11,8 +11,7 @@ const INITIAL_TASK_FORM = {
   taskDescription: ''
 }
 
-const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
-  const dialogRef = useRef(null)
+const AddTaskModal = ({ addTask, isModalOpen, onModalClose }) => {
   const [taskForm, setTaskForm] = useState(INITIAL_TASK_FORM)
   const [showTitleInputError, setShowTitleInputError] = useState(false)
 
@@ -22,27 +21,13 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
       setShowTitleInputError(false)
     }
 
-    if (isAddTaskModalOpen) {
+    if (isModalOpen) {
       resetTaskFormFields()
-      dialogRef.current?.showModal()
-      document.body.classList.add('no-scroll')
-    } else {
-      dialogRef.current?.close()
-      document.body.classList.remove('no-scroll')
     }
-  }, [isAddTaskModalOpen])
-
-  const handleDialogClick = (event) => {
-    const { currentTarget, clientX, clientY } = event
-    const { top, right, bottom, left } = currentTarget.getBoundingClientRect()
-
-    if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
-      onAddTaskModalClose()
-    }
-  }
+  }, [isModalOpen])
 
   const handleCloseModal = () => {
-    onAddTaskModalClose()
+    onModalClose()
   }
 
   const handleSubmit = (event) => {
@@ -67,7 +52,7 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
     }
 
     addTask(task)
-    onAddTaskModalClose()
+    onModalClose()
   }
 
   const handleTitleChange = (event) => {
@@ -97,10 +82,7 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
   }
 
   return (
-    <dialog className='to-do-list--task-modal' ref={dialogRef} onClick={handleDialogClick}>
-      <button className='to-do-list--task-close-button' autoFocus onClick={handleCloseModal}>
-        <IoCloseOutline />
-      </button>
+    <Modal isModalOpen={isModalOpen} onModalClose={onModalClose}>
       <h2 className='to-do-list--task-modal-title'>New Task</h2>
       <form className='to-do-list--task-form' onSubmit={handleSubmit}>
         <input type='text' value={taskForm.taskTitle} name='title' placeholder='Enter a title...' className='to-do-list--form-field to-do-list--task-input' onChange={handleTitleChange} />
@@ -111,7 +93,7 @@ const AddTaskModal = ({ addTask, isAddTaskModalOpen, onAddTaskModalClose }) => {
           <button type='submit' className='to-do-list--task-submit-button'>Add Task</button>
         </div>
       </form>
-    </dialog>
+    </Modal>
   )
 }
 

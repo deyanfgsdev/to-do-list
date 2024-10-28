@@ -105,7 +105,7 @@ const Dashboard = () => {
           <IoAddCircle />
         </button>
       </div>
-      <AddTaskModal addTask={addTask} isAddTaskModalOpen={isAddTaskModalOpen} onAddTaskModalClose={onAddTaskModalClose} />
+      <AddTaskModal addTask={addTask} isModalOpen={isAddTaskModalOpen} onModalClose={onAddTaskModalClose} />
       {task && <TaskDetailsModal task={task} isTaskDetailsModalOpen={isTaskDetailsModalOpen} onTaskDetailsModalClose={onTaskDetailsModalClose} />}
       {task && <TaskEditingModal task={task} editTask={editTask} isTaskEditingModalOpen={isTaskEditingModalOpen} onTaskEditingModalClose={onTaskEditingModalClose} />}
     </main>
