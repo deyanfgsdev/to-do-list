@@ -1,44 +1,15 @@
-import { useEffect, useRef } from 'react'
-
-import { IoCloseOutline } from 'react-icons/io5'
+import Modal from '../Modal/Modal'
 
 import './TaskDetailsModal.scss'
 
-const TaskDetailsModal = ({ task, isTaskDetailsModalOpen, onTaskDetailsModalClose }) => {
-  const dialogRef = useRef(null)
+const TaskDetailsModal = ({ task, isModalOpen, onModalClose }) => {
   const { title, description } = task
 
-  useEffect(() => {
-    if (isTaskDetailsModalOpen) {
-      dialogRef.current?.showModal()
-      document.body.classList.add('no-scroll')
-    } else {
-      dialogRef.current?.close()
-      document.body.classList.remove('no-scroll')
-    }
-  }, [isTaskDetailsModalOpen])
-
-  const handleDialogClick = (event) => {
-    const { currentTarget, clientX, clientY } = event
-    const { top, right, bottom, left } = currentTarget.getBoundingClientRect()
-
-    if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
-      onTaskDetailsModalClose()
-    }
-  }
-
-  const handleCloseModal = () => {
-    onTaskDetailsModalClose()
-  }
-
   return (
-    <dialog className='to-do-list--task-details-modal' ref={dialogRef} onClick={handleDialogClick}>
-      <button className='to-do-list--task-close-button' autoFocus onClick={handleCloseModal}>
-        <IoCloseOutline />
-      </button>
+    <Modal isModalOpen={isModalOpen} onModalClose={onModalClose}>
       <h2 className='to-do-list--task-details-modal-title'>{title}</h2>
       <div className='to-do-list--task-details-modal-description'>{description}</div>
-    </dialog>
+    </Modal>
   )
 }
 
