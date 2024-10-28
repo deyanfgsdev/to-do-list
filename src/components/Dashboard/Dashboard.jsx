@@ -107,7 +107,7 @@ const Dashboard = () => {
       </div>
       <AddTaskModal addTask={addTask} isModalOpen={isAddTaskModalOpen} onModalClose={onAddTaskModalClose} />
       {task && <TaskDetailsModal task={task} isModalOpen={isTaskDetailsModalOpen} onModalClose={onTaskDetailsModalClose} />}
-      {task && <TaskEditingModal task={task} editTask={editTask} isTaskEditingModalOpen={isTaskEditingModalOpen} onTaskEditingModalClose={onTaskEditingModalClose} />}
+      {task && <TaskEditingModal task={task} editTask={editTask} isModalOpen={isTaskEditingModalOpen} onModalClose={onTaskEditingModalClose} />}
     </main>
   )
 }

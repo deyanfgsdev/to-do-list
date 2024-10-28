@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 
-import { IoCloseOutline } from 'react-icons/io5'
+import Modal from '../Modal/Modal'
 
 import '../../style/TaskFormModal.scss'
 
@@ -9,41 +9,25 @@ const INITIAL_TASK_FORM = {
   taskDescription: ''
 }
 
-const TaskEditingModal = ({ task, editTask, isTaskEditingModalOpen, onTaskEditingModalClose }) => {
+const TaskEditingModal = ({ task, editTask, isModalOpen, onModalClose }) => {
   const { id, title, description } = task
 
   const [taskForm, setTaskForm] = useState(INITIAL_TASK_FORM)
   const [showTitleInputError, setShowTitleInputError] = useState(false)
-  const dialogRef = useRef(null)
 
   useEffect(() => {
-    if (isTaskEditingModalOpen) {
+    if (isModalOpen) {
       setTaskForm({
         taskTitle: title,
         taskDescription: description
       })
-
-      dialogRef.current?.showModal()
-      document.body.classList.add('no-scroll')
     } else {
       setTaskForm(INITIAL_TASK_FORM)
-
-      dialogRef.current?.close()
-      document.body.classList.remove('no-scroll')
     }
-  }, [isTaskEditingModalOpen])
-
-  const handleDialogClick = (event) => {
-    const { currentTarget, clientX, clientY } = event
-    const { top, right, bottom, left } = currentTarget.getBoundingClientRect()
-
-    if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
-      onTaskEditingModalClose()
-    }
-  }
+  }, [isModalOpen])
 
   const handleCloseModal = () => {
-    onTaskEditingModalClose()
+    onModalClose()
   }
 
   const handleSubmit = (event) => {
@@ -64,7 +48,7 @@ const TaskEditingModal = ({ task, editTask, isTaskEditingModalOpen, onTaskEditin
     }
 
     editTask(newTask)
-    onTaskEditingModalClose()
+    onModalClose()
   }
 
   const handleTitleChange = (event) => {
@@ -86,10 +70,7 @@ const TaskEditingModal = ({ task, editTask, isTaskEditingModalOpen, onTaskEditin
   }
 
   return (
-    <dialog className='to-do-list--task-modal' ref={dialogRef} onClick={handleDialogClick}>
-      <button className='to-do-list--task-close-button' autoFocus onClick={handleCloseModal}>
-        <IoCloseOutline />
-      </button>
+    <Modal isModalOpen={isModalOpen} onModalClose={onModalClose}>
       <h2 className='to-do-list--task-modal-title'>Edit Task</h2>
       <form className='to-do-list--task-form' onSubmit={handleSubmit}>
         <input type='text' value={taskForm.taskTitle} name='title' placeholder='Enter a title...' className='to-do-list--form-field to-do-list--task-input' onChange={handleTitleChange} />
@@ -100,7 +81,7 @@ const TaskEditingModal = ({ task, editTask, isTaskEditingModalOpen, onTaskEditin
           <button type='submit' className='to-do-list--task-submit-button'>Edit Task</button>
         </div>
       </form>
-    </dialog>
+    </Modal>
   )
 }
 
