@@ -19,9 +19,10 @@ const TaskDetailsModal = ({ task, isTaskDetailsModalOpen, onTaskDetailsModalClos
   }, [isTaskDetailsModalOpen])
 
   const handleDialogClick = (event) => {
-    const { target } = event
+    const { currentTarget, clientX, clientY } = event
+    const { top, right, bottom, left } = currentTarget.getBoundingClientRect()
 
-    if (target === dialogRef.current) {
+    if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
       onTaskDetailsModalClose()
     }
   }
@@ -31,7 +32,7 @@ const TaskDetailsModal = ({ task, isTaskDetailsModalOpen, onTaskDetailsModalClos
   }
 
   return (
-    <dialog className='to-do-list--task-details-modal' ref={dialogRef} onClick={handleDialogClick} onClose={handleCloseModal}>
+    <dialog className='to-do-list--task-details-modal' ref={dialogRef} onClick={handleDialogClick}>
       <button className='to-do-list--task-close-button' autoFocus onClick={handleCloseModal}>
         <IoCloseOutline />
       </button>
