@@ -4,13 +4,15 @@ import { IoCloseOutline } from 'react-icons/io5'
 
 import '../../style/TaskFormModal.scss'
 
+const INITIAL_TASK_FORM = {
+  taskTitle: '',
+  taskDescription: ''
+}
+
 const TaskEditingModal = ({ task, editTask, isTaskEditingModalOpen, onTaskEditingModalClose }) => {
   const { id, title, description } = task
 
-  const [taskForm, setTaskForm] = useState({
-    taskTitle: '',
-    taskDescription: ''
-  })
+  const [taskForm, setTaskForm] = useState(INITIAL_TASK_FORM)
   const [showTitleInputError, setShowTitleInputError] = useState(false)
   const dialogRef = useRef(null)
 
@@ -24,10 +26,7 @@ const TaskEditingModal = ({ task, editTask, isTaskEditingModalOpen, onTaskEditin
       dialogRef.current?.showModal()
       document.body.classList.add('no-scroll')
     } else {
-      setTaskForm({
-        taskTitle: '',
-        taskDescription: ''
-      })
+      setTaskForm(INITIAL_TASK_FORM)
 
       dialogRef.current?.close()
       document.body.classList.remove('no-scroll')
@@ -35,9 +34,10 @@ const TaskEditingModal = ({ task, editTask, isTaskEditingModalOpen, onTaskEditin
   }, [isTaskEditingModalOpen])
 
   const handleDialogClick = (event) => {
-    const { target } = event
+    const { currentTarget, clientX, clientY } = event
+    const { top, right, bottom, left } = currentTarget.getBoundingClientRect()
 
-    if (target === dialogRef.current) {
+    if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
       onTaskEditingModalClose()
     }
   }
@@ -86,7 +86,7 @@ const TaskEditingModal = ({ task, editTask, isTaskEditingModalOpen, onTaskEditin
   }
 
   return (
-    <dialog className='to-do-list--task-modal' ref={dialogRef} onClick={handleDialogClick} onClose={handleCloseModal}>
+    <dialog className='to-do-list--task-modal' ref={dialogRef} onClick={handleDialogClick}>
       <button className='to-do-list--task-close-button' autoFocus onClick={handleCloseModal}>
         <IoCloseOutline />
       </button>
