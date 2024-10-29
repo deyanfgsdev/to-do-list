@@ -3,9 +3,8 @@ import { useState } from 'react'
 import './Dashboard.scss'
 
 import TaskItems from '../TasksItems/TasksItems'
-import AddTaskModal from '../AddTaskModal/AddTaskModal'
+import TaskFormModal from '../TaskFormModal/TaskFormModal'
 import TaskDetailsModal from '../TaskDetailsModal/TaskDetailsModal'
-import TaskEditingModal from '../TaskEditingModal/TaskEditingModal'
 
 import { IoAddCircle } from 'react-icons/io5'
 
@@ -21,17 +20,25 @@ const Dashboard = () => {
 
     return []
   })
-  const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false)
+  const [isTaskFormModalOpen, setIsTaskFormModalOpen] = useState(false)
+  const [isAddTaskForm, setIsAddTaskForm] = useState(false)
+  const [isEditingTaskForm, setIsEditingTaskForm] = useState(false)
   const [task, setTask] = useState(null)
   const [isTaskDetailsModalOpen, setIsTaskDetailsModalOpen] = useState(false)
-  const [isTaskEditingModalOpen, setIsTaskEditingModalOpen] = useState(false)
 
   const handleAddTaskClick = () => {
-    setIsAddTaskModalOpen(true)
+    setIsTaskFormModalOpen(true)
+    setIsAddTaskForm(true)
   }
 
-  const onAddTaskModalClose = () => {
-    setIsAddTaskModalOpen(false)
+  const onTaskFormModalClose = () => {
+    setIsTaskFormModalOpen(false)
+
+    if (isAddTaskForm) {
+      setIsAddTaskForm(false)
+    } else {
+      setIsEditingTaskForm(false)
+    }
   }
 
   const saveAndSetTasks = (newTasks) => {
@@ -66,7 +73,8 @@ const Dashboard = () => {
   }
 
   const openTaskEditingModal = () => {
-    setIsTaskEditingModalOpen(true)
+    setIsTaskFormModalOpen(true)
+    setIsEditingTaskForm(true)
   }
 
   const deleteTask = (taskToDelete) => {
@@ -81,10 +89,6 @@ const Dashboard = () => {
 
   const editTask = (taskToEdit) => {
     refreshTaskList(taskToEdit)
-  }
-
-  const onTaskEditingModalClose = () => {
-    setIsTaskEditingModalOpen(false)
   }
 
   return (
@@ -105,9 +109,16 @@ const Dashboard = () => {
           <IoAddCircle />
         </button>
       </div>
-      <AddTaskModal addTask={addTask} isModalOpen={isAddTaskModalOpen} onModalClose={onAddTaskModalClose} />
-      {task && <TaskDetailsModal task={task} isModalOpen={isTaskDetailsModalOpen} onModalClose={onTaskDetailsModalClose} />}
-      {task && <TaskEditingModal task={task} editTask={editTask} isModalOpen={isTaskEditingModalOpen} onModalClose={onTaskEditingModalClose} />}
+      <TaskFormModal
+        isTaskFormModalOpen={isTaskFormModalOpen}
+        onTaskFormModalClose={onTaskFormModalClose}
+        isAddTaskForm={isAddTaskForm}
+        addTask={addTask}
+        isEditingTaskForm={isEditingTaskForm}
+        task={task}
+        editTask={editTask}
+      />
+      {task && <TaskDetailsModal task={task} isTaskDetailsModalOpen={isTaskDetailsModalOpen} onTaskDetailsModalClose={onTaskDetailsModalClose} />}
     </main>
   )
 }

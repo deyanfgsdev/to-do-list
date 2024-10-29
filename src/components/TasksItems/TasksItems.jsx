@@ -2,7 +2,7 @@ import TaskItem from '../TaskItem/TaskItem'
 
 import './TaskItems.scss'
 
-const TaskItems = ({ tasks, refreshTaskList, updateTaskDetails, openTaskDetailsModal, taskToEdit, openTaskEditingModal, deleteTask }) => {
+const TaskItems = ({ tasks, refreshTaskList, updateTaskDetails, openTaskDetailsModal, openTaskEditingModal, deleteTask }) => {
   return (
     <div className='to-do-list--tasks-items'>
       <ul>
@@ -13,7 +13,6 @@ const TaskItems = ({ tasks, refreshTaskList, updateTaskDetails, openTaskDetailsM
             refreshTaskList={refreshTaskList}
             updateTaskDetails={updateTaskDetails}
             openTaskDetailsModal={openTaskDetailsModal}
-            taskToEdit={taskToEdit}
             openTaskEditingModal={openTaskEditingModal}
             deleteTask={deleteTask}
           />)}
