@@ -57,12 +57,12 @@ const AddTaskModal = ({ addTask, isModalOpen, onModalClose }) => {
 
   const handleTitleChange = (event) => {
     const { value } = event.target
-    const newTasForm = {
+    const newTaskForm = {
       ...taskForm,
       taskTitle: value
     }
 
-    setTaskForm(newTasForm)
+    setTaskForm(newTaskForm)
 
     if (!value) {
       setShowTitleInputError(true)
