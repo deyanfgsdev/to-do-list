@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
 
+import './ModalForm.scss'
+
 const INITIAL_TASK_FORM = {
   taskTitle: '',
   taskDescription: ''

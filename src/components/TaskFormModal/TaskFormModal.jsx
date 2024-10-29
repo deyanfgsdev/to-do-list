@@ -1,8 +1,6 @@
 import Modal from '../Modal/Modal'
 import ModalForm from '../ModalForm/ModalForm'
 
-import '../../style/TaskFormModal.scss'
-
 const TaskFormModal = ({ isTaskFormModalOpen, onTaskFormModalClose, isAddTaskForm, addTask, isEditingTaskForm, task, editTask }) => {
   return (
     <Modal isModalOpen={isTaskFormModalOpen} onModalClose={onTaskFormModalClose}>
