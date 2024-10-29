@@ -118,7 +118,7 @@ const Dashboard = () => {
         task={task}
         editTask={editTask}
       />
-      {task && <TaskDetailsModal task={task} isTaskDetailsModalOpen={isTaskDetailsModalOpen} onTaskDetailsModalClose={onTaskDetailsModalClose} />}
+      <TaskDetailsModal task={task} isTaskDetailsModalOpen={isTaskDetailsModalOpen} onTaskDetailsModalClose={onTaskDetailsModalClose} />
     </main>
   )
 }
