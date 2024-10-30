@@ -1,12 +1,12 @@
 $grey_primary: #787878;
 
-.to-do-list--task-details-modal-title {
+.dialog__details-title {
   font-size: 26px;
   line-height: 30px;
   color: #000;
   margin: 24px 0 0 0;
 }
-.to-do-list--task-details-modal-description {
+.dialog__details-description {
   font-size: 16px;
   line-height: 20px;
   color: $grey_primary;

@@ -8,7 +8,7 @@ li {
   & + li {
     margin-top: 16px;
   }
-  .to-do-list--task-item {
+  .task-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,19 +16,19 @@ li {
     padding: 16px;
     box-shadow: 0 0 10px #e5e5e5;
     border-radius: 8px;
-    .to-do-list--task-item-info-container {
+    .task-item__info-wrapper {
       display: flex;
       align-items: center;
       gap: 16px;
-      .to-do-list--task-checkbox-wrapper {
-        .to-do-list--task-checkbox-input {
+      .checkbox-wrapper {
+        .checkbox-wrapper__checkbox {
           position: absolute;
           opacity: 0;
           cursor: pointer;
           height: 0;
           width: 0;
           margin: 0;
-          & + label {
+          & + .checkbox-wrapper__label {
             position: relative;
             cursor: pointer;
             display: inline-block;
@@ -60,7 +60,7 @@ li {
           }
         }
       }
-      .to-do-list--task-item-info {
+      .task-item-info {
         max-width: 120px;
         @media (min-width: 375px) {
           max-width: 175px;
@@ -74,7 +74,7 @@ li {
         @media (min-width: 1200px) {
           max-width: 820px;
         }
-        .to-do-list--task-title {
+        .task-item-info__title {
           font-size: 20px;
           line-height: 24px;
           color: $grey_tertiary;
@@ -82,11 +82,11 @@ li {
           overflow: hidden;
           text-overflow: ellipsis;
           margin: 0;
-          &.to-do-list--completed-task {
+          &.task-item-info__title--completed-task {
             text-decoration: line-through;
           }
         }
-        .to-do-list--task-description {
+        .task-item-info__description {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -97,10 +97,10 @@ li {
         }
       }
     }
-    .to-do-list--task-item-actions {
+    .task-item__actions {
       display: flex;
       gap: 8px;
-      button {
+      .task-item-action {
         display: flex;
         background-color: transparent;
         color: $pink_primary;

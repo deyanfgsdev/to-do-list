@@ -4,7 +4,7 @@ import './TaskItems.scss'
 
 const TaskItems = ({ tasks, refreshTaskList, updateTaskDetails, openTaskDetailsModal, openTaskEditingModal, deleteTask }) => {
   return (
-    <div className='to-do-list--tasks-items'>
+    <div className='main__tasks-items'>
       <ul>
         {tasks.map((task) =>
           <TaskItem

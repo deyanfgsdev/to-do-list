@@ -117,14 +117,14 @@ const ModalForm = ({ isAddTaskForm, addTask, isEditingTaskForm, task, editTask, 
 
   return (
     <>
-      <h2 className='to-do-list--task-modal-title'>{modalTitle}</h2>
-      <form className='to-do-list--task-form' onSubmit={handleSubmit}>
-        <input type='text' value={taskForm.taskTitle} name='title' placeholder='Enter a title...' className='to-do-list--form-field to-do-list--task-input' onChange={handleTitleChange} />
-        {showTitleInputError && <p className='to-do-list--task-input-error'>Please enter a title</p>}
-        <textarea value={taskForm.taskDescription} name='description' placeholder='Enter a description...' className='to-do-list--form-field to-do-list--task-textarea' onChange={handleDescriptionChange} />
-        <div className='to-do-list--task-form-actions'>
-          <button type='button' className='to-do-list--task-cancel-button' onClick={handleCloseModal}>Cancel</button>
-          <button type='submit' className='to-do-list--task-submit-button'>{formSubmitButtonText}</button>
+      <h2 className='dialog__title'>{modalTitle}</h2>
+      <form className='form' onSubmit={handleSubmit}>
+        <input type='text' value={taskForm.taskTitle} name='title' placeholder='Enter a title...' className='form__field form__field--title' onChange={handleTitleChange} />
+        {showTitleInputError && <p className='form__title-error'>Please enter a title</p>}
+        <textarea value={taskForm.taskDescription} name='description' placeholder='Enter a description...' className='form__field form__field--description' onChange={handleDescriptionChange} />
+        <div className='form__actions'>
+          <button type='button' className='form-action form-action--cancel-button' onClick={handleCloseModal}>Cancel</button>
+          <button type='submit' className='form-action form-action--submit-button'>{formSubmitButtonText}</button>
         </div>
       </form>
     </>

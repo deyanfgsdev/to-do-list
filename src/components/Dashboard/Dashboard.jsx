@@ -92,8 +92,8 @@ const Dashboard = () => {
   }
 
   return (
-    <main className='to-do-list--dashboard'>
-      {!tasks.length && <h3 className='to-do-list--no-tasks'>There are no tasks. Add your first task!</h3>}
+    <main className='main'>
+      {!tasks.length && <h3 className='main__no-tasks-info'>There are no tasks. Add your first task!</h3>}
       {!!tasks.length && <TaskItems
         tasks={tasks}
         refreshTaskList={refreshTaskList}
@@ -102,10 +102,10 @@ const Dashboard = () => {
         openTaskEditingModal={openTaskEditingModal}
         deleteTask={deleteTask}
                          />}
-      <div className='to-do-list--add-task-button-container'>
-        {!tasks.length && <span className='to-do-list--current-tasks'>0 Tasks</span>}
-        {!!tasks.length && <span className='to-do-list--current-tasks'>{`${tasks.length} ${tasks.length > 1 ? 'Tasks' : 'Task'}`}</span>}
-        <button className='to-do-list--add-task-button' onClick={handleAddTaskClick}>
+      <div className='main__add-task-button-wrapper'>
+        {!tasks.length && <span className='current-tasks'>0 Tasks</span>}
+        {!!tasks.length && <span className='current-tasks'>{`${tasks.length} ${tasks.length > 1 ? 'Tasks' : 'Task'}`}</span>}
+        <button className='add-task-button' onClick={handleAddTaskClick}>
           <IoAddCircle />
         </button>
       </div>

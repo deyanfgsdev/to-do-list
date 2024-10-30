@@ -4,13 +4,13 @@ import './Footer.scss'
 
 const Footer = () => {
   return (
-    <footer>
-      <address className='to-do-list--footer-author'>
+    <footer className='footer'>
+      <address className='footer__author'>
         &copy; 2024 Developed by deyanfgsdev
       </address>
-      <div className='to-do-list--footer-rrss'>
+      <div className='footer__rrss'>
         {rrssData.map(({ id, icon: Icon, url }) => (
-          <a key={id} href={url} target='_blank' rel='noopener noreferrer'>
+          <a key={id} href={url} target='_blank' rel='noopener noreferrer' className='rrss-link'>
             <Icon />
           </a>
         ))}

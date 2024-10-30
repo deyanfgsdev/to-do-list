@@ -31,8 +31,8 @@ const Modal = ({ children, isModalOpen, onModalClose }) => {
   }
 
   return (
-    <dialog className='to-do-list--task-modal' ref={dialogRef} onClick={handleDialogClick}>
-      <button className='to-do-list--task-close-button' autoFocus onClick={handleModalCloseButton}>
+    <dialog className='main__task-dialog dialog' ref={dialogRef} onClick={handleDialogClick}>
+      <button className='dialog__close-button' autoFocus onClick={handleModalCloseButton}>
         <IoCloseOutline />
       </button>
       {children}

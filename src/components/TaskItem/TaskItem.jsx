@@ -12,7 +12,7 @@ const TaskItem = ({ task, refreshTaskList, updateTaskDetails, openTaskDetailsMod
 
   const [taskCompleted, setTaskCompleted] = useState(initialIsCompleted)
 
-  const titleClassName = taskCompleted ? 'to-do-list--task-title to-do-list--completed-task' : 'to-do-list--task-title'
+  const titleClassName = taskCompleted ? 'task-item-info__title task-item-info__title--completed-task' : 'task-item-info__title'
 
   const handleTaskStateChange = (event) => {
     setTaskCompleted(!taskCompleted)
@@ -37,25 +37,25 @@ const TaskItem = ({ task, refreshTaskList, updateTaskDetails, openTaskDetailsMod
 
   return (
     <li>
-      <div className='to-do-list--task-item'>
-        <div className='to-do-list--task-item-info-container'>
-          <div className='to-do-list--task-checkbox-wrapper'>
-            <input type='checkbox' checked={taskCompleted} id={`to-do-list--task-checkbox-${id}`} className='to-do-list--task-checkbox-input' onChange={handleTaskStateChange} />
-            <label htmlFor={`to-do-list--task-checkbox-${id}`} />
+      <div className='task-item'>
+        <div className='task-item__info-wrapper'>
+          <div className='checkbox-wrapper'>
+            <input type='checkbox' checked={taskCompleted} id={`task-${id}`} className='checkbox-wrapper__checkbox' onChange={handleTaskStateChange} />
+            <label htmlFor={`task-${id}`} className='checkbox-wrapper__label' />
           </div>
-          <div className='to-do-list--task-item-info'>
+          <div className='task-item-info'>
             <h3 className={titleClassName}>{title}</h3>
-            <p className='to-do-list--task-description'>{description}</p>
+            <p className='task-item-info__description'>{description}</p>
           </div>
         </div>
-        <div className='to-do-list--task-item-actions'>
-          <button onClick={handleDetailsClick}>
+        <div className='task-item__actions'>
+          <button className='task-item-action' onClick={handleDetailsClick}>
             <FaRegEye />
           </button>
-          <button onClick={handleEditClick}>
+          <button className='task-item-action' onClick={handleEditClick}>
             <GoPencil />
           </button>
-          <button onClick={handleDeleteClick}>
+          <button className='task-item-action' onClick={handleDeleteClick}>
             <MdDeleteOutline />
           </button>
         </div>

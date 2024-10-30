@@ -3,22 +3,19 @@ $grey_primary: #787878;
 $grey_secondary: #c0c0c0;
 $red_primary: #d63232;
 
-.to-do-list--task-modal-title {
+.dialog__title {
   font-size: 26px;
   line-height: 30px;
   color: #000;
   text-align: center;
   margin: 24px 0 0 0;
 }
-.to-do-list--task-form {
+.form {
   margin-top: 24px;
-  .to-do-list--form-field {
-    & + .to-do-list--form-field {
+  .form__field {
+    & + .form__field {
       margin-top: 16px;
     }
-  }
-  .to-do-list--task-input,
-  .to-do-list--task-textarea {
     width: 100%;
     border: 2px solid $pink_primary;
     background-color: transparent;
@@ -40,7 +37,7 @@ $red_primary: #d63232;
       color: $grey_secondary;
     }
   }
-  .to-do-list--task-textarea {
+  .form__field--description {
     height: 100px;
     resize: none;
     scrollbar-width: none;
@@ -49,19 +46,19 @@ $red_primary: #d63232;
       display: none;
     }
   }
-  .to-do-list--task-input-error {
+  .form__title-error {
     color: $red_primary;
     font-size: 12px;
     line-height: 16px;
     width: 100%;
     margin: 8px 0;
   }
-  .to-do-list--task-form-actions {
+  .form__actions {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
     margin-top: 8px;
-    button {
+    .form-action {
       width: fit-content;
       padding: 8px 16px;
       font-size: 16px;
@@ -69,12 +66,12 @@ $red_primary: #d63232;
       border-radius: 4px;
       border: none;
       cursor: pointer;
-      &.to-do-list--task-cancel-button {
+      &.form-action--cancel-button {
         background-color: transparent;
         border: 1px solid $pink_primary;
         color: $grey_primary;
       }
-      &.to-do-list--task-submit-button {
+      &.form-action--submit-button {
         background-color: $pink_primary;
       }
     }

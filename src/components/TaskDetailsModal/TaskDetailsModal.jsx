@@ -24,8 +24,8 @@ const TaskDetailsModal = ({ task, isTaskDetailsModalOpen, onTaskDetailsModalClos
 
   return (
     <Modal isModalOpen={isTaskDetailsModalOpen} onModalClose={onTaskDetailsModalClose}>
-      <h2 className='to-do-list--task-details-modal-title'>{taskDetails.title}</h2>
-      <div className='to-do-list--task-details-modal-description'>{taskDetails.description}</div>
+      <h2 className='dialog__details-title'>{taskDetails.title}</h2>
+      <div className='dialog__details-description'>{taskDetails.description}</div>
     </Modal>
   )
 }

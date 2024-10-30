@@ -1,6 +1,6 @@
 $pink_primary: #e53170;
 
-.to-do-list--task-modal {
+.dialog {
   background-color: #fff;
   border: 0;
   border-radius: 16px;
@@ -16,7 +16,7 @@ $pink_primary: #e53170;
   @media (min-width: 768px) {
     max-width: 500px;
   }
-  .to-do-list--task-close-button {
+  .dialog__close-button {
     position: absolute;
     top: 8px;
     right: 8px;
