@@ -29,7 +29,7 @@ Inspired design: [here](https://www.figma.com/community/file/1112736756305740770
 
 ![Skills](https://skillicons.dev/icons?i=figma)
 
-## Deployed in:
+### Deployed in:
 
 ![Skills](https://skillicons.dev/icons?i=vercel)
 
