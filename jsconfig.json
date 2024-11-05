@@ -1,0 +1,6 @@
+{
+  "typeAcquisition": {
+    "include": ["playwright"]
+  },
+  "exclude": ["**/node_modules/*"]
+}
