@@ -1,9 +1,5 @@
 export const storageGetTasks = () => {
-  if (typeof window !== 'undefined') {
-    return JSON.parse(window.localStorage.getItem('to-do-list--tasks'))
-  } else {
-    return null
-  }
+  return JSON.parse(window.localStorage.getItem('to-do-list--tasks'))
 }
 
 export const storageSaveTasks = (tasks) => {
