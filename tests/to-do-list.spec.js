@@ -58,6 +58,13 @@ test.describe('New task', () => {
     const storageTasks = await page.evaluate(storageGetTasks)
     await expect(storageTasks?.length).toBe(tasks.length)
   })
+
+  test('should append new items to the top of the list', async ({ page }) => {
+    await createDefaultTasks(page)
+
+    const currentTasksElem = await page.locator('.main__add-task-button-wrapper > .current-tasks')
+    await expect(currentTasksElem).toHaveText('2 Tasks')
+  })
 })
 
 const createDefaultTasks = async (page) => {
