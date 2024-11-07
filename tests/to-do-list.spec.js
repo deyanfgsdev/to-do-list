@@ -48,23 +48,10 @@ test.describe('New task', () => {
   })
 
   test('should allow me to add to do list tasks', async ({ page }) => {
-    for (const task of tasks) {
-      const addTaskButton = await page.locator('.add-task-button')
-      await addTaskButton.click()
-
-      const { title, description } = task
-
-      const formFieldTitleElem = await page.locator('.main__task-dialog .form__field--title')
-      await formFieldTitleElem.fill(title)
-
-      const formFieldDescriptionElem = await page.locator('.main__task-dialog .form__field--description')
-      await formFieldDescriptionElem.fill(description)
-
-      const modalAddTaskButton = await page.locator('.main__task-dialog .form-action--submit-button')
-      await modalAddTaskButton.click()
-    }
+    await createDefaultTasks(page)
 
     const tasksListItems = await page.locator('.main__tasks-items > ul > li')
+
     await expect(tasksListItems).toHaveCount(tasks.length)
 
     // Get the tasks from the storage
@@ -72,3 +59,21 @@ test.describe('New task', () => {
     await expect(storageTasks?.length).toBe(tasks.length)
   })
 })
+
+const createDefaultTasks = async (page) => {
+  for (const task of tasks) {
+    const addTaskButton = await page.locator('.add-task-button')
+    await addTaskButton.click()
+
+    const { title, description } = task
+
+    const formFieldTitleElem = await page.locator('.main__task-dialog .form__field--title')
+    await formFieldTitleElem.fill(title)
+
+    const formFieldDescriptionElem = await page.locator('.main__task-dialog .form__field--description')
+    await formFieldDescriptionElem.fill(description)
+
+    const modalAddTaskButton = await page.locator('.main__task-dialog .form-action--submit-button')
+    await modalAddTaskButton.click()
+  }
+}
