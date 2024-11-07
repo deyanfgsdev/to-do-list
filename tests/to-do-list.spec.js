@@ -69,8 +69,6 @@ test.describe('New task', () => {
 
     // Get the tasks from the storage
     const storageTasks = await page.evaluate(storageGetTasks)
-
-    console.log('storageTasks', storageTasks)
     await expect(storageTasks?.length).toBe(tasks.length)
   })
 })
