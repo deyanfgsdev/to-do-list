@@ -14,16 +14,11 @@ const tasks = [{
 }]
 
 test.beforeEach(async ({ page }) => {
-  await page.exposeFunction('storageGetTasks', storageGetTasks)
   await page.goto(LOCALHOST_URL)
 })
 
 test('should show a message when there are no tasks', async ({ page }) => {
-  const storageTasks = await page.evaluate(async () => {
-    const tasks = await window.storageGetTasks()
-
-    return tasks
-  })
+  const storageTasks = await page.evaluate(storageGetTasks)
 
   if (!storageTasks || !storageTasks.length) {
     const messageElem = await page.locator('.main__no-tasks-info')
@@ -50,5 +45,32 @@ test.describe('New task', () => {
       const titleErrorElem = await page.locator('.form__title-error')
       await expect(titleErrorElem).toBeVisible()
     }
+  })
+
+  test('should allow me to add to do list tasks', async ({ page }) => {
+    for (const task of tasks) {
+      const addTaskButton = await page.locator('.add-task-button')
+      await addTaskButton.click()
+
+      const { title, description } = task
+
+      const formFieldTitleElem = await page.locator('.main__task-dialog .form__field--title')
+      await formFieldTitleElem.fill(title)
+
+      const formFieldDescriptionElem = await page.locator('.main__task-dialog .form__field--description')
+      await formFieldDescriptionElem.fill(description)
+
+      const modalAddTaskButton = await page.locator('.main__task-dialog .form-action--submit-button')
+      await modalAddTaskButton.click()
+    }
+
+    const tasksListItems = await page.locator('.main__tasks-items > ul > li')
+    await expect(tasksListItems).toHaveCount(tasks.length)
+
+    // Get the tasks from the storage
+    const storageTasks = await page.evaluate(storageGetTasks)
+
+    console.log('storageTasks', storageTasks)
+    await expect(storageTasks?.length).toBe(tasks.length)
   })
 })
