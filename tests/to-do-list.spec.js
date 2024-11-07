@@ -65,6 +65,15 @@ test.describe('New task', () => {
     const currentTasksElem = await page.locator('.main__add-task-button-wrapper > .current-tasks')
     await expect(currentTasksElem).toHaveText('2 Tasks')
   })
+
+  test('the task form modal should not be displayed when we add tasks', async ({ page }) => {
+    await createDefaultTasks(page)
+
+    const modalElems = await page.locator('.main > .main__task-dialog')
+    const formModalElem = await modalElems.first()
+    const formModalElemOpen = await formModalElem.getAttribute('open')
+    await expect(formModalElemOpen).toBeNull()
+  })
 })
 
 const createDefaultTasks = async (page) => {
