@@ -53,10 +53,7 @@ test.describe('New task', () => {
     const tasksListItems = await page.locator('.main__tasks-items > ul > li')
 
     await expect(tasksListItems).toHaveCount(tasks.length)
-
-    // Get the tasks from the storage
-    const storageTasks = await page.evaluate(storageGetTasks)
-    await expect(storageTasks?.length).toBe(tasks.length)
+    await checkNumberOfTasksInStorage(page, 2)
   })
 
   test('should append new items to the top of the list', async ({ page }) => {
@@ -76,6 +73,38 @@ test.describe('New task', () => {
   })
 })
 
+test.describe('Task Item', () => {
+  test.beforeEach(async ({ page }) => {
+    await createDefaultTasks(page)
+  })
+
+  test('should allow me to mark a item as complete', async ({ page }) => {
+    const tasksListItems = await page.locator('.main__tasks-items > ul > li')
+
+    // First task
+    const firstTaskElem = await tasksListItems.first()
+    const firstTaskCheckboxLabel = await firstTaskElem.locator('.checkbox-wrapper__label')
+    await firstTaskCheckboxLabel.click()
+
+    const firstTaskCheckbox = await firstTaskElem.locator('.checkbox-wrapper__checkbox')
+    await expect(firstTaskCheckbox).toBeChecked()
+
+    const firstTaskTitleElem = await firstTaskElem.locator('.task-item-info__title')
+    await expect(firstTaskTitleElem).toHaveClass('task-item-info__title task-item-info__title--completed-task')
+
+    // Second task
+    const secondTaskElem = await tasksListItems.nth(1)
+    const secondTaskCheckboxLabel = await secondTaskElem.locator('.checkbox-wrapper__label')
+    await secondTaskCheckboxLabel.click()
+
+    const secondTaskCheckbox = await secondTaskElem.locator('.checkbox-wrapper__checkbox')
+    await expect(secondTaskCheckbox).toBeChecked()
+
+    const secondTaskTitleElem = await secondTaskElem.locator('.task-item-info__title')
+    expect(secondTaskTitleElem).toHaveClass('task-item-info__title task-item-info__title--completed-task')
+  })
+})
+
 const createDefaultTasks = async (page) => {
   for (const task of tasks) {
     const addTaskButton = await page.locator('.add-task-button')
@@ -92,4 +121,10 @@ const createDefaultTasks = async (page) => {
     const modalAddTaskButton = await page.locator('.main__task-dialog .form-action--submit-button')
     await modalAddTaskButton.click()
   }
+}
+
+const checkNumberOfTasksInStorage = async (page, expectedTasksNumber) => {
+  // Get the tasks from the storage
+  const storageTasks = await page.evaluate(storageGetTasks)
+  await expect(storageTasks?.length).toBe(expectedTasksNumber)
 }
