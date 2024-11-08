@@ -78,7 +78,7 @@ test.describe('Task Item', () => {
     await createDefaultTasks(page)
   })
 
-  test('should allow me to mark a item as complete', async ({ page }) => {
+  test('should allow me to mark a task item as complete', async ({ page }) => {
     const tasksListItems = await page.locator('.main__tasks-items > ul > li')
 
     // First task
@@ -102,6 +102,10 @@ test.describe('Task Item', () => {
 
     const secondTaskTitleElem = await secondTaskElem.locator('.task-item-info__title')
     expect(secondTaskTitleElem).toHaveClass('task-item-info__title task-item-info__title--completed-task')
+  })
+
+  test('should allow me to un-mark a done task item', async () => {
+
   })
 })
 
