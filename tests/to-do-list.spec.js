@@ -255,6 +255,28 @@ test.describe('Task Item', () => {
 
     await checkTasksInStorage(page, 'Call to the client')
   })
+
+  test('should allow me to delete a task', async ({ page }) => {
+    const tasksListItems = await page.locator('.main__tasks-items > ul > li')
+
+    // First task
+    const firstTaskElem = await tasksListItems.first()
+    const firstTaskDeleteButton = firstTaskElem.locator('.task-item__actions > button.task-item-action:last-child')
+    await expect(firstTaskDeleteButton).toBeVisible()
+    await firstTaskDeleteButton.click()
+
+    await expect(tasksListItems).toHaveCount(1)
+    await checkNumberOfTasksInStorage(page, 1)
+
+    // Second task
+    const secondTaskElem = await tasksListItems.first()
+    const secondTaskDeleteButton = secondTaskElem.locator('.task-item__actions > button.task-item-action:last-child')
+    await expect(secondTaskDeleteButton).toBeVisible()
+    await secondTaskDeleteButton.click()
+
+    await expect(tasksListItems).toHaveCount(0)
+    await checkNumberOfTasksInStorage(page, 0)
+  })
 })
 
 const createDefaultTasks = async (page) => {
