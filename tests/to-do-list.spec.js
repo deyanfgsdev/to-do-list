@@ -132,6 +132,7 @@ test.describe('Task Item', () => {
     // First task
     const firstTaskElem = await tasksListItems.first()
     const firstTaskViewDetailsButton = await firstTaskElem.locator('.task-item__actions > button.task-item-action:first-child')
+    await expect(firstTaskViewDetailsButton).toBeVisible()
     await firstTaskViewDetailsButton.click()
 
     const taskDetailsModal = await page.locator('.main > .main__task-dialog:last-child')
@@ -156,6 +157,7 @@ test.describe('Task Item', () => {
     // Second task
     const secondTaskElem = await tasksListItems.nth(1)
     const secondTaskViewDetailsButton = await secondTaskElem.locator('.task-item__actions > button.task-item-action:first-child')
+    await expect(secondTaskViewDetailsButton).toBeVisible()
     await secondTaskViewDetailsButton.click()
 
     await expect(taskDetailsModal).toHaveAttribute('open')
