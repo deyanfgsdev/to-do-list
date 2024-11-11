@@ -101,11 +101,29 @@ test.describe('Task Item', () => {
     await expect(secondTaskCheckbox).toBeChecked()
 
     const secondTaskTitleElem = await secondTaskElem.locator('.task-item-info__title')
-    expect(secondTaskTitleElem).toHaveClass('task-item-info__title task-item-info__title--completed-task')
+    await expect(secondTaskTitleElem).toHaveClass('task-item-info__title task-item-info__title--completed-task')
   })
 
-  test('should allow me to un-mark a done task item', async () => {
+  test('should allow me to un-mark a done task item', async ({ page }) => {
+    const tasksListItems = await page.locator('.main__tasks-items > ul > li')
 
+    const firstTaskElem = await tasksListItems.first()
+    const firstTaskCheckboxLabel = await firstTaskElem.locator('.checkbox-wrapper__label')
+    await firstTaskCheckboxLabel.click()
+
+    const firstTaskCheckbox = await firstTaskElem.locator('.checkbox-wrapper__checkbox')
+    await expect(firstTaskCheckbox).toBeChecked()
+
+    const firstTaskTitleElem = await firstTaskElem.locator('.task-item-info__title')
+    await expect(firstTaskTitleElem).toHaveClass('task-item-info__title task-item-info__title--completed-task')
+
+    await checkNumberOfCompletedTasksInStorage(page, 1)
+
+    await firstTaskCheckboxLabel.click()
+    await expect(firstTaskCheckbox).not.toBeChecked()
+    await expect(firstTaskTitleElem).toHaveClass('task-item-info__title')
+
+    await checkNumberOfCompletedTasksInStorage(page, 0)
   })
 })
 
@@ -131,4 +149,10 @@ const checkNumberOfTasksInStorage = async (page, expectedTasksNumber) => {
   // Get the tasks from the storage
   const storageTasks = await page.evaluate(storageGetTasks)
   await expect(storageTasks?.length).toBe(expectedTasksNumber)
+}
+
+const checkNumberOfCompletedTasksInStorage = async (page, expectedCompletedTasksNumber) => {
+  const storageTasks = await page.evaluate(storageGetTasks)
+  const completedTasks = storageTasks?.filter((task) => task.isCompleted)
+  await expect(completedTasks.length).toBe(expectedCompletedTasksNumber)
 }
