@@ -279,6 +279,19 @@ test.describe('Task Item', () => {
   })
 })
 
+test.describe('Number of current tasks', () => {
+  test.beforeEach(async ({ page }) => {
+    await createDefaultTasks(page)
+  })
+
+  test('should display the current number of tasks', async ({ page }) => {
+    const currentTasksElem = await page.locator('.main__add-task-button-wrapper > .current-tasks')
+    const currentTasksText = await currentTasksElem.textContent()
+    await expect(currentTasksElem).toBeVisible()
+    await expect(currentTasksText).toBe('2 Tasks')
+  })
+})
+
 const createDefaultTasks = async (page) => {
   for (const task of tasks) {
     const addTaskButton = await page.locator('.add-task-button')
