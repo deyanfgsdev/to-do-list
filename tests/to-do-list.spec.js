@@ -125,6 +125,54 @@ test.describe('Task Item', () => {
 
     await checkNumberOfCompletedTasksInStorage(page, 0)
   })
+
+  test("should allow me to show a task's details", async ({ page }) => {
+    const tasksListItems = await page.locator('.main__tasks-items > ul > li')
+
+    // First task
+    const firstTaskElem = await tasksListItems.first()
+    const firstTaskViewDetailsButton = await firstTaskElem.locator('.task-item__actions > button.task-item-action:first-child')
+    await firstTaskViewDetailsButton.click()
+
+    const taskDetailsModal = await page.locator('.main > .main__task-dialog:last-child')
+    await expect(taskDetailsModal).toHaveAttribute('open')
+    await expect(taskDetailsModal).toBeVisible()
+
+    const taskDetailsModalTitle = await taskDetailsModal.locator('.dialog__details-title')
+    await expect(taskDetailsModalTitle).toBeVisible()
+    const taskDetailsModalDescription = await taskDetailsModal.locator('.dialog__details-description')
+    await expect(taskDetailsModalDescription).toBeVisible()
+
+    const firstTaskDetailsModalTitleText = await taskDetailsModalTitle.textContent()
+    const firstTaskDetailsModalDescriptionText = await taskDetailsModalDescription.textContent()
+
+    const { title: firstTaskTitle, description: firstTaskDescription } = tasks[1]
+    await expect(firstTaskDetailsModalTitleText).toBe(firstTaskTitle)
+    await expect(firstTaskDetailsModalDescriptionText).toBe(firstTaskDescription)
+
+    const taskDetailsModalCloseButton = await taskDetailsModal.locator('.dialog__close-button')
+    await taskDetailsModalCloseButton.click()
+
+    // Second task
+    const secondTaskElem = await tasksListItems.nth(1)
+    const secondTaskViewDetailsButton = await secondTaskElem.locator('.task-item__actions > button.task-item-action:first-child')
+    await secondTaskViewDetailsButton.click()
+
+    await expect(taskDetailsModal).toHaveAttribute('open')
+    await expect(taskDetailsModal).toBeVisible()
+
+    await expect(taskDetailsModalTitle).toBeVisible()
+    await expect(taskDetailsModalDescription).toBeVisible()
+
+    const secondTaskDetailsModalTitleText = await taskDetailsModalTitle.textContent()
+    const secondTaskDetailsModalDescriptionText = await taskDetailsModalDescription.textContent()
+
+    const { title: secondTaskTitle, description: secondTaskDescription } = tasks[0]
+    await expect(secondTaskDetailsModalTitleText).toBe(secondTaskTitle)
+    await expect(secondTaskDetailsModalDescriptionText).toBe(secondTaskDescription)
+
+    await taskDetailsModalCloseButton.click()
+  })
 })
 
 const createDefaultTasks = async (page) => {
