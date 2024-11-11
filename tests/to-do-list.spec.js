@@ -102,6 +102,8 @@ test.describe('Task Item', () => {
 
     const secondTaskTitleElem = await secondTaskElem.locator('.task-item-info__title')
     await expect(secondTaskTitleElem).toHaveClass('task-item-info__title task-item-info__title--completed-task')
+
+    await checkNumberOfCompletedTasksInStorage(page, 2)
   })
 
   test('should allow me to un-mark a done task item', async ({ page }) => {
