@@ -177,6 +177,84 @@ test.describe('Task Item', () => {
 
     await taskDetailsModalCloseButton.click()
   })
+
+  test('should allow me to edit a task', async ({ page }) => {
+    const tasksListItems = await page.locator('.main__tasks-items > ul > li')
+
+    // First task
+    const firstTaskElem = await tasksListItems.first()
+    const firstTaskEditButton = await firstTaskElem.locator('.task-item__actions > button.task-item-action:nth-child(2)')
+    await expect(firstTaskEditButton).toBeVisible()
+    await firstTaskEditButton.click()
+
+    const taskEditingModal = await page.locator('.main > .main__task-dialog:nth-child(3)')
+    await expect(taskEditingModal).toHaveAttribute('open')
+    await expect(taskEditingModal).toBeVisible()
+
+    const taskEditingModalMainTitleElem = await taskEditingModal.locator('.dialog__title')
+    const taskEditingModalMainTitleText = await taskEditingModalMainTitleElem.textContent()
+    await expect(taskEditingModalMainTitleText).toBe('Edit Task')
+
+    const firstTaskFormFieldTitleElem = await taskEditingModal.locator('.form__field--title')
+    const firstTaskFormFieldTitleValue = await firstTaskFormFieldTitleElem.inputValue()
+
+    const firstTaskFormFieldDescriptionElem = await taskEditingModal.locator('.form__field--description')
+    const firstTaskFormFieldDescriptionValue = await firstTaskFormFieldDescriptionElem.inputValue()
+
+    const { title: firstTaskTitle, description: firstTaskDescription } = tasks[1]
+    await expect(firstTaskFormFieldTitleValue).toBe(firstTaskTitle)
+    await expect(firstTaskFormFieldDescriptionValue).toBe(firstTaskDescription)
+
+    await firstTaskFormFieldTitleElem.fill('Send an email')
+    await firstTaskFormFieldDescriptionElem.fill("About the project's progress")
+
+    const taskEditingModalSaveButton = await taskEditingModal.locator('.form-action--submit-button')
+    await taskEditingModalSaveButton.click()
+
+    const firstTaskTitleElem = await firstTaskElem.locator('.task-item-info__title')
+    const firstTaskTitleText = await firstTaskTitleElem.textContent()
+    await expect(firstTaskTitleText).toBe('Send an email')
+
+    const firstTaskDescriptionElem = await firstTaskElem.locator('.task-item-info__description')
+    const firstTaskDescriptionText = await firstTaskDescriptionElem.textContent()
+    await expect(firstTaskDescriptionText).toBe("About the project's progress")
+
+    await checkTasksInStorage(page, 'Send an email')
+
+    // Second task
+    const secondTaskElem = await tasksListItems.nth(1)
+    const secondTaskEditButton = await secondTaskElem.locator('.task-item__actions > button.task-item-action:nth-child(2)')
+    await expect(secondTaskEditButton).toBeVisible()
+    await secondTaskEditButton.click()
+
+    await expect(taskEditingModal).toHaveAttribute('open')
+    await expect(taskEditingModal).toBeVisible()
+
+    const secondTaskFormFieldTitleElem = await taskEditingModal.locator('.form__field--title')
+    const secondTaskFormFieldTitleValue = await secondTaskFormFieldTitleElem.inputValue()
+
+    const secondTaskFormFieldDescriptionElem = await taskEditingModal.locator('.form__field--description')
+    const secondTaskFormFieldDescriptionValue = await secondTaskFormFieldDescriptionElem.inputValue()
+
+    const { title: secondTaskTitle, description: secondTaskDescription } = tasks[0]
+    await expect(secondTaskFormFieldTitleValue).toBe(secondTaskTitle)
+    await expect(secondTaskFormFieldDescriptionValue).toBe(secondTaskDescription)
+
+    await secondTaskFormFieldTitleElem.fill('Call to the client')
+    await secondTaskFormFieldDescriptionElem.fill('To confirm the meeting')
+
+    await taskEditingModalSaveButton.click()
+
+    const secondTaskTitleElem = await secondTaskElem.locator('.task-item-info__title')
+    const secondTaskTitleText = await secondTaskTitleElem.textContent()
+    await expect(secondTaskTitleText).toBe('Call to the client')
+
+    const secondTaskDescriptionElem = await secondTaskElem.locator('.task-item-info__description')
+    const secondTaskDescriptionText = await secondTaskDescriptionElem.textContent()
+    await expect(secondTaskDescriptionText).toBe('To confirm the meeting')
+
+    await checkTasksInStorage(page, 'Call to the client')
+  })
 })
 
 const createDefaultTasks = async (page) => {
@@ -207,4 +285,11 @@ const checkNumberOfCompletedTasksInStorage = async (page, expectedCompletedTasks
   const storageTasks = await page.evaluate(storageGetTasks)
   const completedTasks = storageTasks?.filter((task) => task.isCompleted)
   await expect(completedTasks.length).toBe(expectedCompletedTasksNumber)
+}
+
+const checkTasksInStorage = async (page, title) => {
+  const storageTasks = await page.evaluate(storageGetTasks)
+  const task = storageTasks?.find((task) => task.title === title)
+
+  await expect(task).toBeTruthy()
 }
