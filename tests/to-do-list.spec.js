@@ -286,9 +286,15 @@ test.describe('Number of current tasks', () => {
 
   test('should display the current number of tasks', async ({ page }) => {
     const currentTasksElem = await page.locator('.main__add-task-button-wrapper > .current-tasks')
-    const currentTasksText = await currentTasksElem.textContent()
     await expect(currentTasksElem).toBeVisible()
-    await expect(currentTasksText).toBe('2 Tasks')
+    await expect(currentTasksElem).toHaveText('2 Tasks')
+
+    const tasksListItems = await page.locator('.main__tasks-items > ul > li')
+    const firstTaskElem = await tasksListItems.first()
+    const firstTaskDeleteButton = await firstTaskElem.locator('.task-item__actions > button.task-item-action:last-child')
+    await firstTaskDeleteButton.click()
+
+    await expect(currentTasksElem).toHaveText('1 Task')
   })
 })
 
