@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 
 import { storageGetTasks } from '../src/storage'
 
-const LOCALHOST_URL = 'http://localhost:5173/'
+const PROD_URL = 'https://to-do-list-nu-nine-31.vercel.app/'
 
 const tasks = [{
   title: 'Go to the supermarket',
@@ -14,7 +14,7 @@ const tasks = [{
 }]
 
 test.beforeEach(async ({ page }) => {
-  await page.goto(LOCALHOST_URL)
+  await page.goto(PROD_URL)
 })
 
 test.describe('No tasks', () => {
