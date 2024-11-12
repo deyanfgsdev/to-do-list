@@ -17,17 +17,14 @@ test.beforeEach(async ({ page }) => {
   await page.goto(LOCALHOST_URL)
 })
 
-test('should show a message when there are no tasks', async ({ page }) => {
-  const storageTasks = await page.evaluate(storageGetTasks)
-
-  if (!storageTasks || !storageTasks.length) {
+test.describe('No tasks', () => {
+  test('should show a message when there are no tasks', async ({ page }) => {
     const messageElem = await page.locator('.main__no-tasks-info')
     const messageText = await messageElem.textContent()
 
     await expect(messageElem).toBeVisible()
-    await expect(messageText?.length).toBeGreaterThan(0)
     await expect(messageText).toContain('There are no tasks')
-  }
+  })
 })
 
 test.describe('New task', () => {
