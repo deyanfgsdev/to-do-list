@@ -295,6 +295,42 @@ test.describe('Number of current tasks', () => {
   })
 })
 
+test.describe('Browser data persistence', () => {
+  test('should persist the tasks data', async ({ page }) => {
+    await createDefaultTasks(page)
+
+    const tasksListItems = await page.locator('.main__tasks-items > ul > li')
+    await expect(tasksListItems).toHaveCount(tasks.length)
+
+    const firstTaskElem = await tasksListItems.first()
+    const firstTaskCheckboxLabel = await firstTaskElem.locator('.checkbox-wrapper__label')
+    await firstTaskCheckboxLabel.click()
+    const firstTaskCheckbox = await firstTaskElem.locator('.checkbox-wrapper__checkbox')
+    await expect(firstTaskCheckbox).toBeChecked()
+    const firstTaskTitleElem = await firstTaskElem.locator('.task-item-info__title')
+    await expect(firstTaskTitleElem).toHaveClass('task-item-info__title task-item-info__title--completed-task')
+
+    const secondTaskElem = await tasksListItems.nth(1)
+    const secondTaskCheckbox = await secondTaskElem.locator('.checkbox-wrapper__checkbox')
+    await expect(secondTaskCheckbox).not.toBeChecked()
+    const secondTaskTitleElem = await secondTaskElem.locator('.task-item-info__title')
+    await expect(secondTaskTitleElem).toHaveClass('task-item-info__title')
+
+    await checkNumberOfCompletedTasksInStorage(page, 1)
+
+    // Reload the page
+    await page.reload()
+    await expect(tasksListItems).toHaveCount(tasks.length)
+    await expect(firstTaskCheckbox).toBeChecked()
+    await expect(firstTaskTitleElem).toHaveClass('task-item-info__title task-item-info__title--completed-task')
+
+    await expect(secondTaskCheckbox).not.toBeChecked()
+    await expect(secondTaskTitleElem).toHaveClass('task-item-info__title')
+
+    await checkNumberOfCompletedTasksInStorage(page, 1)
+  })
+})
+
 const createDefaultTasks = async (page) => {
   for (const task of tasks) {
     const addTaskButton = await page.locator('.add-task-button')
