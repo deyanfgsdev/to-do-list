@@ -23,15 +23,15 @@ Inspired design: [here](https://www.figma.com/community/file/1112736756305740770
 
 ### Built with:
 
-![Skills](https://skillicons.dev/icons?i=react,vite,js,html,sass)
+![Skills](https://go-skill-icons.vercel.app/api/icons?i=react,vite,javascript,html,sass,playwright)
 
 ### Misc tools:
 
-![Skills](https://skillicons.dev/icons?i=figma)
+![Skills](https://go-skill-icons.vercel.app/api/icons?i=figma)
 
 ### Deployed in:
 
-![Skills](https://skillicons.dev/icons?i=vercel)
+![Skills](https://go-skill-icons.vercel.app/api/icons?i=vercel)
 
 ## Installation and setup
 
@@ -47,6 +47,16 @@ git clone https://github.com/deyanfgsdev/to-do-list.git
 cd to-do-list
 npm install
 npm run dev
+```
+
+### E2E testing with Playwright:
+
+```
+# Run test
+npx playwright test
+
+# Run test in UI mode
+npx playwright test --ui
 ```
 
 ## Copyright
