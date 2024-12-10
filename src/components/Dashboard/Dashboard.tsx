@@ -13,7 +13,7 @@ import {
   IsTaskDetailsModalOpenState,
 } from './Dashboard.types';
 
-import TaskItems from '../TasksItems/TasksItems';
+import TaskItems from '../TaskItems/TaskItems';
 import TaskFormModal from '../TaskFormModal/TaskFormModal';
 import TaskDetailsModal from '../TaskDetailsModal/TaskDetailsModal';
 
