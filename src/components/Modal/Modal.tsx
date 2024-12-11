@@ -1,8 +1,7 @@
-import { useEffect, useRef, ReactElement } from 'react';
+import { useEffect, useRef, ReactNode } from 'react';
 
 import './Modal.scss';
 
-import ModalForm from '../ModalForm/ModalForm';
 import { IoCloseOutline } from 'react-icons/io5';
 
 const Modal = ({
@@ -10,7 +9,7 @@ const Modal = ({
   isModalOpen,
   onModalClose,
 }: {
-  children: ReactElement<typeof ModalForm>;
+  children: ReactNode;
   isModalOpen: boolean;
   onModalClose: () => void;
 }) => {
