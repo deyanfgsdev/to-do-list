@@ -5,11 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "lint": "standard",
-    "format": "prettier --write \"src/**/*.{css,scss,html,json,md}\"",
-    "check-format": "prettier --check \"src/**/*.{css,scss,html,json,md}\"",
-    "validate": "npm run lint && npm run check-format",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
