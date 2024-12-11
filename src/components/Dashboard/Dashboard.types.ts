@@ -1,5 +1,5 @@
 export interface Task {
-  id: `${string}-${string}-${string}-${string}-${string}`;
+  id: string;
   title: string;
   description: string;
   isCompleted: boolean;
