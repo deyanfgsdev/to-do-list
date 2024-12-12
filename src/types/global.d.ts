@@ -1,6 +1,6 @@
-/* Social Media */
-
 import { IconType } from 'react-icons';
+
+/* Social Media */
 
 interface SocialMedia {
   id: number;
