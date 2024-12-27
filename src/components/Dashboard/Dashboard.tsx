@@ -60,15 +60,11 @@ const Dashboard = () => {
     }
   };
 
-  const saveAndSetTasks = (newTasks: Tasks) => {
-    storageSaveTasks(newTasks);
-    setTasks(newTasks);
-  };
-
   const addTask = (task: Task) => {
     const newTasks = [task, ...tasks];
 
-    saveAndSetTasks(newTasks);
+    storageSaveTasks(newTasks);
+    setTasks((prevState) => [task, ...prevState]);
   };
 
   const refreshTaskList = (taskToUpdate: Task) => {
@@ -80,7 +76,16 @@ const Dashboard = () => {
       return task;
     });
 
-    saveAndSetTasks(newTasks);
+    storageSaveTasks(newTasks);
+    setTasks((prevState) =>
+      prevState.map((task) => {
+        if (task.id === taskToUpdate.id) {
+          return taskToUpdate;
+        }
+
+        return task;
+      })
+    );
   };
 
   const updateTaskDetails = (task: Task) => {
@@ -99,7 +104,10 @@ const Dashboard = () => {
   const deleteTask = (taskToDelete: Task) => {
     const newTasks = tasks.filter((task) => task.id !== taskToDelete.id);
 
-    saveAndSetTasks(newTasks);
+    storageSaveTasks(newTasks);
+    setTasks((prevState) =>
+      prevState.filter((task) => task.id !== taskToDelete.id)
+    );
   };
 
   const onTaskDetailsModalClose = () => {

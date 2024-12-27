@@ -5,7 +5,10 @@ export interface Task {
   isCompleted: boolean;
 }
 export type Tasks = Task[];
-export type TasksState = [Tasks, (newTasks: Tasks) => void];
+export type TasksState = [
+  Tasks,
+  (updater: (prevState: Tasks) => Tasks) => void,
+];
 export type IsTaskFormModalOpenState = [
   boolean,
   (newIsTaskFormModalOpen: boolean) => void,
