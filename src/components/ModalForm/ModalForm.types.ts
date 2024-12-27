@@ -7,7 +7,10 @@ export interface TaskForm {
   taskTitle: string;
   taskDescription: string;
 }
-export type TaskFormState = [TaskForm, (newTaskForm: TaskForm) => void];
+export type TaskFormState = [
+  TaskForm,
+  (newTaskForm: TaskForm | ((prevState: TaskForm) => TaskForm)) => void,
+];
 export type ShowTitleInputErrorState = [
   boolean,
   (newShowTitleInputErrorState: boolean) => void,

@@ -127,12 +127,8 @@ const ModalForm = ({
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const newTaskForm = {
-      ...taskForm,
-      taskTitle: value,
-    };
 
-    setTaskForm(newTaskForm);
+    setTaskForm((prevState) => ({ ...prevState, taskTitle: value }));
 
     if (!value) {
       setShowTitleInputError(true);
@@ -145,12 +141,8 @@ const ModalForm = ({
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { value } = event.target;
-    const newTaskForm = {
-      ...taskForm,
-      taskDescription: value,
-    };
 
-    setTaskForm(newTaskForm);
+    setTaskForm((prevState) => ({ ...prevState, taskDescription: value }));
   };
 
   return (
