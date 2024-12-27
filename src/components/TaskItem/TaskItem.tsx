@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './TaskItem.scss';
 
 import { Task } from '../Dashboard/Dashboard.types';
+import { TaskCompletedState } from './TaskItem.types';
 
 import { FaRegEye } from 'react-icons/fa';
 import { GoPencil } from 'react-icons/go';
@@ -26,7 +27,8 @@ const TaskItem = ({
   const { id, title, description, isCompleted } = task;
   const initialIsCompleted = isCompleted;
 
-  const [taskCompleted, setTaskCompleted] = useState(initialIsCompleted);
+  const [taskCompleted, setTaskCompleted]: TaskCompletedState =
+    useState<boolean>(initialIsCompleted);
 
   const titleClassName = taskCompleted
     ? 'task-item-info__title task-item-info__title--completed-task'
